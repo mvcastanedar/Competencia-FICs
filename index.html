@@ -1,493 +1,430 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Análisis Comparativo · FIC de Liquidez · Agosto 2026</title>
+<title>Competencia FICs — Skandia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0E2240; --navy-2:#1B3A63; --navy-3:#2F5C8A;
-  --blue:#3A6FA8; --blue-lt:#7FA8CF; --blue-bg:#EEF4FA;
-  --green:#00A651; --green-dk:#00703C; --green-lt:#4FC17E; --green-bg:#F4FBF7;
-  --amber:#F08C1E; --amber-bg:#FDF4E7;
-  --red:#C0392B;
-  --paper:#F4F6F8; --card:#FFFFFF;
-  --ink:#132038; --muted:#69798F; --line:#E3E9EF; --line-2:#EEF2F6;
-  --shadow:0 1px 3px rgba(14,34,64,.07), 0 6px 18px rgba(14,34,64,.05);
+  --navy:#0E2C4B; --navy-2:#173D63; --navy-3:#27547F;
+  --green:#00A34A; --green-2:#41B75B; --green-soft:#E6F5EC;
+  --amber:#E08A2B; --amber-soft:#FBEEDC;
+  --ink:#122334; --ink-2:#44586B; --ink-3:#7D8FA0;
+  --line:#DCE4EB; --bg:#EDF1F5; --card:#fff;
+  --radius:10px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  font-size:14.5px;line-height:1.5;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
-a{color:var(--green-dk)}
-:focus-visible{outline:2px solid var(--green);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:13px;line-height:1.45}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:'tnum'}
+.wrap{max-width:1380px;margin:0 auto;padding:14px}
 
-/* ---------- hero ---------- */
-.hero{background:linear-gradient(112deg,#08182F 0%,#0E2240 42%,#1B3A63 100%);color:#fff;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:0;opacity:.13;
+/* ---------- header ---------- */
+.hero{position:relative;overflow:hidden;border-radius:var(--radius);
+  background:linear-gradient(103deg,#0B2440 0%,#0E2C4B 38%,#1B4B79 72%,#24618F 100%);
+  color:#fff;padding:20px 24px 22px}
+.hero:after{content:"";position:absolute;inset:0;opacity:.20;
   background:
-   repeating-linear-gradient(90deg,transparent 0 46px,rgba(255,255,255,.35) 46px 47px),
-   repeating-linear-gradient(0deg,transparent 0 38px,rgba(255,255,255,.18) 38px 39px);
-  mask-image:linear-gradient(100deg,transparent 38%,#000 100%)}
-.hero-in{max-width:1460px;margin:0 auto;padding:26px 26px 30px;position:relative;z-index:1;
-  display:flex;gap:24px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
-.rule{width:74px;height:4px;background:var(--green);border-radius:2px;margin-bottom:14px}
-.hero h1{margin:0;font-size:clamp(27px,4vw,42px);font-weight:800;letter-spacing:-.025em;line-height:1.04}
-.hero h1 em{display:block;font-style:normal;color:var(--green)}
-.hero .meta{margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.16);max-width:46ch}
-.hero .meta .k{font-size:11px;letter-spacing:.18em;color:#9FB6D1;margin-bottom:2px}
-.hero .meta .v{font-size:15px;font-weight:600}
-.hero .meta p{margin:8px 0 0;color:#B9C9DC;font-size:13.5px;line-height:1.45}
-.chip{background:var(--green);color:#fff;font-weight:600;font-size:14px;border-radius:6px;padding:9px 18px;
-  box-shadow:0 2px 10px rgba(0,166,81,.35);white-space:nowrap}
-.chip small{display:block;font-weight:500;font-size:11px;opacity:.85;letter-spacing:.1em}
+   radial-gradient(circle at 78% 18%, rgba(65,183,91,.55), transparent 42%),
+   repeating-linear-gradient(112deg, rgba(255,255,255,.06) 0 2px, transparent 2px 26px);
+  pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero h1{margin:0;font-size:23px;font-weight:600;letter-spacing:-.01em}
+.hero h1 span{display:block;color:var(--green-2);font-weight:600}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:700;letter-spacing:.06em}
+.brand:before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;
+  background:var(--green-2);margin-right:7px;transform:translateY(-2px)}
+.cut{background:#fff;color:var(--navy);border-radius:6px;padding:7px 12px;
+  font-size:12px;font-weight:600;display:inline-block}
 
-/* ---------- kpis ---------- */
-.kpis{max-width:1460px;margin:0 auto;padding:20px 26px 4px;
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
-.kpi{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);
-  border-radius:13px;padding:13px 16px;box-shadow:var(--shadow)}
-.kpi .ico{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
-  border:2px solid currentColor;background:#fff}
-.kpi .sep{width:1px;align-self:stretch;background:var(--line);margin:2px 0}
-.kpi .t{min-width:0}
-.kpi .t span{display:block;font-size:11.5px;font-weight:600;color:currentColor;line-height:1.25}
-.kpi .t b{display:block;font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.15;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kpi.green{color:var(--green);background:#F4FBF7}
-.kpi.navy{color:var(--navy-2);background:#F5F8FC}
-.kpi.blue{color:var(--blue);background:#F2F7FC}
-.kpi.amber{color:var(--amber);background:var(--amber-bg)}
+/* selector de fondo de referencia */
+.refs{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.ref{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#fff;
+  border-radius:8px;padding:9px 14px;font:inherit;text-align:left;cursor:pointer;min-width:210px}
+.ref b{display:block;font-size:13.5px;font-weight:600}
+.ref small{display:block;font-size:10.5px;color:#A9C3D9;margin-top:1px}
+.ref[aria-pressed=true]{background:#fff;color:var(--navy);border-color:#fff}
+.ref[aria-pressed=true] small{color:#2E7D52}
+.ref:hover{background:rgba(255,255,255,.2)}
+.ref[aria-pressed=true]:hover{background:#fff}
 
-/* ---------- layout ---------- */
-.wrap{max-width:1460px;margin:0 auto;padding:14px 26px 60px;display:grid;grid-template-columns:272px 1fr;gap:20px;align-items:start}
-@media(max-width:1020px){.wrap{grid-template-columns:1fr}}
+/* ---------- panels ---------- */
+.panel{background:var(--card);border-radius:var(--radius);box-shadow:0 1px 2px rgba(16,44,75,.10);
+  overflow:hidden;margin-top:12px}
+.ph{display:flex;align-items:center;gap:9px;padding:9px 14px;background:var(--green-soft);
+  border-bottom:1px solid #CFE8D9}
+.ph h2{margin:0;font-size:12.5px;font-weight:600;color:#0C6B38}
+.ph .ic{width:22px;height:22px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#fff}
+.pb{padding:14px}
 
-/* ---------- pill de sección ---------- */
-.pill{display:inline-flex;align-items:center;border-radius:999px;color:#fff;font-weight:600;font-size:15px;
-  padding:8px 24px 8px 46px;position:relative;margin:0 0 6px;line-height:1.25}
-.pill.navy{background:linear-gradient(95deg,#0E2240 10%,#4076AE 100%)}
-.pill.green{background:linear-gradient(95deg,#00703C 10%,#12BB63 100%)}
-.pill .pi{position:absolute;left:-1px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
-  background:#fff;display:grid;place-items:center;box-shadow:0 1px 4px rgba(14,34,64,.18)}
-.pill.navy .pi{border:2px solid var(--navy)}
-.pill.green .pi{border:2px solid var(--green-dk)}
-.pill .pi svg{width:20px;height:20px}
-
-/* ---------- panel de fondos ---------- */
-.rail{background:var(--card);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);
-  position:sticky;top:14px;overflow:hidden}
-.rail h2{font-size:12.5px;font-weight:600;margin:0;padding:12px 14px;color:#fff;
-  background:linear-gradient(95deg,#0E2240,#2F5C8A);display:flex;justify-content:space-between;align-items:center}
-.rail h2 button{font:inherit;font-size:11.5px;font-weight:600;background:rgba(255,255,255,.14);border:0;color:#fff;
-  cursor:pointer;padding:3px 10px;border-radius:999px}
-.rail h2 button:hover{background:var(--green)}
-.flist{max-height:min(60vh,600px);overflow:auto}
-.frow{display:flex;gap:9px;align-items:flex-start;padding:9px 14px;border-bottom:1px solid var(--line-2);
-  cursor:pointer;font-size:13px;line-height:1.3}
-.frow:last-child{border-bottom:0}
-.frow:hover{background:#F5F9FC}
-.frow input{margin:2px 0 0;accent-color:var(--green);cursor:pointer;flex:0 0 auto}
-.frow .swatch{width:4px;align-self:stretch;border-radius:2px;flex:0 0 auto}
-.frow .fn{font-weight:600}
-.frow .fa{display:block;color:var(--muted);font-size:11px;margin-top:1px;font-weight:400}
-.frow.off{opacity:.4}
-
-/* ---------- pestañas ---------- */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.tab{font:inherit;font-size:13px;font-weight:600;padding:8px 15px;background:#E7ECF2;border:1px solid transparent;
-  border-radius:999px;cursor:pointer;color:var(--muted)}
-.tab:hover{color:var(--navy);background:#DDE5EE}
-.tab[aria-selected="true"]{background:var(--navy);color:#fff}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:var(--shadow)}
-.panel p.lead{color:var(--muted);font-size:13px;margin:6px 0 16px;max-width:86ch}
-.controls{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:14px;font-size:13px}
-.controls label{color:var(--muted);font-weight:500}
-select{font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border:0;border-radius:6px;
-  background:var(--green);color:#fff;cursor:pointer}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
-.seg button{font:inherit;font-size:12.5px;font-weight:600;padding:6px 14px;background:transparent;border:0;
-  border-right:1px solid var(--line);cursor:pointer;color:var(--muted)}
-.seg button:last-child{border-right:0}
-.seg button:hover{color:var(--navy)}
-.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+/* ---------- controles ---------- */
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;
+  background:var(--card);border-radius:var(--radius);padding:10px 12px;box-shadow:0 1px 2px rgba(16,44,75,.10)}
+input[type=search],select{font:inherit;font-size:12.5px;color:var(--ink);background:#F6F8FA;
+  border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+input[type=search]{min-width:200px;flex:1}
+input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible{outline:2px solid var(--navy-3);outline-offset:1px}
+.seg{display:flex;background:#F6F8FA;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:12px;font-weight:500;border:0;background:transparent;color:var(--ink-2);
+  padding:7px 11px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--navy);color:#fff}
+.chk{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);cursor:pointer;
+  padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#F6F8FA}
+.chk input{accent-color:var(--green)}
+.ghost{font:inherit;font-size:12px;font-weight:500;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:7px 11px;cursor:pointer;color:var(--navy-2)}
+.ghost:hover{background:#F3F7FA}
 
 /* ---------- tabla ---------- */
-.tablescroll{overflow:auto;border:1px solid var(--line);border-radius:9px}
-table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{text-align:right;padding:8px 11px;white-space:nowrap;border-bottom:1px solid var(--line-2)}
-th{position:sticky;top:0;background:var(--navy);color:#fff;font-weight:600;font-size:11px;letter-spacing:.04em;
-  cursor:pointer;user-select:none;z-index:2}
-th:hover{background:var(--navy-2)}
-th.sorted{background:var(--navy-2);color:#fff}
-th:first-child,td:first-child{text-align:left;position:sticky;left:0;z-index:1;border-right:1px solid var(--line)}
-td:first-child{background:var(--card)}
-th:first-child{background:var(--navy);z-index:3}
-tbody tr:nth-child(even) td{background:#F8FAFC}
-tbody tr:hover td{background:var(--blue-bg)}
-td .barcell{position:relative;display:block}
-td .bar{position:absolute;left:0;top:50%;transform:translateY(-50%);height:17px;border-radius:2px;z-index:0;
-  background:rgba(58,111,168,.17)}
-td .bar.neg{background:rgba(240,140,30,.18)}
-td .v{position:relative;z-index:1}
-.best{font-weight:700;color:var(--green-dk)}
-.worst{color:var(--red)}
-.flag{display:inline-block;width:15px;height:15px;line-height:15px;text-align:center;border-radius:50%;
-  background:var(--amber);color:#fff;font-size:10px;font-weight:800;margin-left:6px;cursor:help;vertical-align:1px}
-.fname{font-weight:600}
-.fadmin{color:var(--muted);font-size:11px;font-weight:400}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:1000px}
+thead th{background:var(--navy);color:#fff;font-size:10.5px;font-weight:600;letter-spacing:.02em;
+  padding:9px 10px;text-align:right;white-space:nowrap;position:sticky;top:0;cursor:pointer;user-select:none}
+thead th:first-child,thead th:nth-child(2){text-align:left}
+tbody td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td:first-child,tbody td:nth-child(2){text-align:left;white-space:normal}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:#F4F8FB}
+tbody tr.base{background:var(--green-soft)}
+tbody tr.base:hover{background:#D9EFE3}
+.fname{font-weight:600;color:var(--navy);font-size:12.5px}
+.fsub{font-size:10.5px;color:var(--ink-3)}
+.muted{color:var(--ink-2);font-size:11.5px}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:3px 9px;font-size:11px;font-weight:600}
+.pill.si{background:var(--green-soft);color:#0C6B38}
+.pill.no{background:var(--amber-soft);color:#98550B}
+.pill.td{background:#EEF2F6;color:#5A6C7D}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.why{font-size:11px;color:var(--ink-2);max-width:260px;display:block;margin-top:3px;white-space:normal}
 
-/* ---------- gráficos ---------- */
-.chartbox{background:#FBFCFE;border:1px solid var(--line);border-radius:9px;padding:10px}
-svg{display:block;width:100%;height:auto;overflow:visible}
-.ax{stroke:#C7D2DE;stroke-width:1}
-.grid{stroke:var(--line-2);stroke-width:1}
-.axlabel{fill:var(--muted);font-size:11px}
-.axtitle{fill:var(--navy);font-size:11.5px;font-weight:600}
-.pt{cursor:pointer}
-.ptlabel{font-size:11px;fill:var(--ink);font-weight:600}
-.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:12.5px;color:var(--muted)}
-.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-
-/* ---------- barras / composición ---------- */
-.stack{margin-bottom:12px}
-.stack .lbl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px;gap:10px}
-.stack .lbl b{font-weight:600}
-.stack .lbl span{color:var(--muted);font-size:11.5px}
-.bars{display:flex;height:23px;border-radius:4px;overflow:hidden;background:var(--line-2)}
-.bars div{height:100%}
-.bars div[data-tip]{cursor:help}
-
-/* ---------- ficha ---------- */
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:0 30px}
-.dl{margin:0 0 18px}
-.dl h4{font-size:11.5px;font-weight:700;color:#fff;margin:0 0 7px;padding:5px 12px;border-radius:999px;
-  background:linear-gradient(95deg,#0E2240,#4076AE);display:inline-block}
-.dl div{display:flex;justify-content:space-between;gap:14px;padding:4px 0;font-size:13px;border-bottom:1px solid var(--line-2)}
-.dl div span{color:var(--muted)}
-.dl div b{font-weight:600;text-align:right}
-
-/* ---------- notas ---------- */
-.note{padding:11px 0;border-bottom:1px solid var(--line-2);font-size:13.5px;display:grid;grid-template-columns:215px 1fr;gap:18px}
-.note b{font-weight:700;color:var(--navy)}
-@media(max-width:640px){.note{grid-template-columns:1fr;gap:2px}}
-.callout{background:var(--amber-bg);border-left:4px solid var(--amber);padding:11px 14px;font-size:13px;
-  border-radius:0 7px 7px 0;margin-bottom:16px}
-
-#tip{position:fixed;pointer-events:none;background:var(--navy);color:#fff;font-size:12px;padding:7px 10px;
-  border-radius:6px;opacity:0;transition:opacity .12s;z-index:99;max-width:270px;line-height:1.38;
-  box-shadow:0 6px 20px rgba(14,34,64,.3)}
-footer{max-width:1460px;margin:0 auto;padding:0 26px 40px;color:var(--muted);font-size:12px;line-height:1.5}
+/* ---------- panel lateral ---------- */
+.scrim{position:fixed;inset:0;background:rgba(14,44,75,.45);opacity:0;pointer-events:none;transition:opacity .18s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:#fff;
+  transform:translateX(100%);transition:transform .22s ease;display:flex;flex-direction:column;z-index:5}
+.drawer.on{transform:none}
+@media(prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
+.dh{background:var(--navy);color:#fff;padding:16px 18px;position:relative}
+.dh h3{margin:0 0 2px;font-size:17px;font-weight:600}
+.dh p{margin:0;font-size:11.5px;color:#A9C3D9}
+.dc{padding:16px 18px;overflow-y:auto;flex:1}
+.verdict{border-radius:var(--radius);padding:13px 15px;margin-bottom:14px}
+.verdict.si{background:var(--green-soft);border-left:4px solid var(--green)}
+.verdict.no{background:var(--amber-soft);border-left:4px solid var(--amber)}
+.verdict.td{background:#EEF2F6;border-left:4px solid #93A5B5}
+.verdict h4{margin:0 0 6px;font-size:13.5px}
+.verdict p{margin:0;font-size:12.5px;color:#2B3B49;line-height:1.55}
+.verdict ul{margin:0;padding-left:17px;font-size:12.5px;color:#2B3B49;line-height:1.55}
+.verdict li{margin-bottom:7px}
+.verdict li:last-child{margin-bottom:0}
+.sec{font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.05em;margin:18px 0 8px}
+.cmp{width:100%;border-collapse:collapse;min-width:0}
+.cmp th{background:#F1F5F8;color:var(--ink-2);font-size:10.5px;font-weight:600;padding:6px 8px;text-align:right;position:static}
+.cmp th:first-child{text-align:left}
+.cmp td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);font-size:12px}
+.cmp td:first-child{text-align:left;color:var(--ink-2)}
+.up{color:#0C6B38;font-weight:600} .dn{color:#B4471F;font-weight:600}
+textarea{width:100%;min-height:120px;font:inherit;font-size:12.5px;line-height:1.55;padding:10px;
+  border:1px solid var(--line);border-radius:6px;resize:vertical;background:#FAFCFD}
+.row{display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap}
+.primary{font:inherit;font-size:12.5px;font-weight:600;background:var(--green);color:#fff;border:0;
+  border-radius:6px;padding:8px 14px;cursor:pointer}
+.primary:hover{background:#00913F}
+.saved{font-size:11.5px;color:var(--green);opacity:0;transition:opacity .2s}
+.saved.on{opacity:1}
+.x{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:0;color:#fff;
+  width:28px;height:28px;border-radius:6px;font-size:16px;cursor:pointer;line-height:1}
+.foot{color:var(--ink-3);font-size:11px;text-align:center;padding:16px 8px 6px}
+svg text{font-family:'Inter',sans-serif}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink-2);margin-top:8px}
+.legend i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:5px}
 </style>
-</head>
-<body>
-<div id="tip"></div>
-
-<div class="hero">
- <div class="hero-in">
-  <div>
-   <div class="rule"></div>
-   <h1>Análisis Comparativo<em>FIC de Liquidez</em></h1>
-   <div class="meta">
-    <div class="k">UNIVERSO</div>
-    <div class="v">11 fondos · 8 administradoras</div>
-    <p>Rentabilidad, riesgo, costos y composición del portafolio. Marque o desmarque fondos en el panel izquierdo: la selección aplica a todas las vistas.</p>
-   </div>
-  </div>
-  <div class="chip"><small>FECHA DE CORTE</small>Agosto 2026</div>
- </div>
-</div>
-
-<div class="kpis" id="kpis"></div>
 
 <div class="wrap">
-  <aside class="rail">
-    <h2>FONDOS <button id="toggleAll">Ninguno</button></h2>
-    <div class="flist" id="flist"></div>
-  </aside>
-  <main>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" data-view="tabla" aria-selected="true">Comparador</button>
-      <button class="tab" role="tab" data-view="riesgo" aria-selected="false">Riesgo y retorno</button>
-      <button class="tab" role="tab" data-view="costos" aria-selected="false">Costos</button>
-      <button class="tab" role="tab" data-view="composicion" aria-selected="false">Composición</button>
-      <button class="tab" role="tab" data-view="ficha" aria-selected="false">Ficha</button>
-      <button class="tab" role="tab" data-view="notas" aria-selected="false">Notas</button>
+  <header class="hero">
+    <div class="hero-top">
+      <div>
+        <h1>Competencia FICs<span>Rentabilidad y comparabilidad</span></h1>
+      </div>
+      <div style="text-align:right">
+        <div class="brand">skandia</div>
+        <div style="margin-top:10px"><span class="cut" id="corte">Corte 31/08/2026</span></div>
+      </div>
     </div>
-    <div class="panel" id="panel"></div>
-  </main>
+    <div class="refs" id="refs" role="group" aria-label="Fondo de referencia"></div>
+  </header>
+
+  <div class="bar">
+    <input type="search" id="q" placeholder="Buscar fondo, administrador o gestor">
+    <select id="fAdmin"></select>
+    <div class="seg" id="segPer" role="group" aria-label="Periodo">
+      <button data-p="1m">1 mes</button>
+      <button data-p="6m">6 meses</button>
+      <button data-p="ytd">Año corrido</button>
+      <button data-p="1a" aria-pressed="true">1 año</button>
+    </div>
+    <label class="chk"><input type="checkbox" id="onlyComp"> Solo comparables</label>
+    <button class="ghost" id="csv">Descargar CSV</button>
+  </div>
+
+  <section class="panel">
+    <div class="ph"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h2 id="rankTitle">Rentabilidad por fondo</h2></div>
+    <div class="pb"><div id="rank"></div>
+      <div class="legend">
+        <span><i style="background:#00A34A"></i>Fondo de referencia</span>
+        <span><i style="background:#17375E"></i>Comparable</span>
+        <span><i style="background:#C6D2DC"></i>No comparable o por definir</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="ph"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><h2>Detalle de fondos <span id="count" style="font-weight:400;color:#2E7D52"></span></h2></div>
+    <div class="tw"><table id="tbl">
+      <thead><tr>
+        <th data-k="fondo">Fondo</th>
+        <th data-k="admin">Administrador / Gestor</th>
+        <th data-k="valor">Valor fondo<br>(Mill COP)</th>
+        <th data-k="r1m">Rent. 1 mes</th>
+        <th data-k="r6m">Rent. 6 meses</th>
+        <th data-k="rytd">Rent. año corrido</th>
+        <th data-k="r1a">Rent. 1 año</th>
+        <th data-k="v1m">Vol. 1 mes</th>
+        <th data-k="v6m">Vol. 6 meses</th>
+        <th data-k="vytd">Vol. año corrido</th>
+        <th data-k="v1a">Vol. 1 año</th>
+        <th data-k="comparable" id="thComp">Comparable</th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
+    </table></div>
+  </section>
+
+  <p class="foot">Fuente: Consolidado FIC con corte al 31/08/2026 y lista de comparables. Las rentabilidades son efectivas anuales según ficha técnica de cada fondo.</p>
 </div>
 
-<footer>Fuente: fichas técnicas de cada administradora consolidadas en <i>Consolidado_FIC_31-08-2026.xlsx</i>. Las rentabilidades son las publicadas por cada administradora y son netas de gastos. Rentabilidades pasadas no garantizan resultados futuros; este tablero no constituye una recomendación de inversión.</footer>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="Detalle del fondo">
+  <div class="dh">
+    <button class="x" id="close" aria-label="Cerrar">×</button>
+    <h3 id="dName"></h3><p id="dMeta"></p>
+  </div>
+  <div class="dc" id="dBody"></div>
+</aside>
 
 <script>
-const DATA = {"funds": [{"Fondo": "FIC Skandia Efectivo", "Participación": "Tipo D - 503", "Administrador/Gestor": "Skandia Fiduciaria S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "FIC abierto sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 1551740.73, "Valor unidad": 4311.072987, "Calificación": "S1/AAAf(col)", "Calificadora": "Fitch Ratings Colombia", "Gastos totales": 0.0157, "Remuneración efectivamente cobrada": 0.015, "Administración": 0.015, "Inversión inicial mínima (COP)": 10000, "Saldo mínimo (COP)": ">1", "Preaviso retiro (días)": null, "Días pacto permanencia": null, "Sanción retiro anticipado": null, "Duración (años)": 0.252, "Plazo promedio incl. disponible (años)": 0.58, "Plazo promedio excl. disponible (años)": 0.86, "Plazo promedio incl. disponible (dias)": 211.758, "Plazo promedio excl. disponible (dias)": 313.924, "Rentabilidad último mes": 0.11428, "Rentabilidad últimos 6 meses": 0.11334, "Rentabilidad año corrido": 0.10187, "Rentabilidad último año": 0.08772, "Volatilidad último mes": 0.00159, "Volatilidad últimos 6 meses": 0.00307, "Volatilidad año corrido": 0.00364, "Volatilidad último año": 0.00384, "composicion": {"fuente": "Texto de la ficha", "Tipo de renta": {"Caja": 0.3265, "Tasa Fija": 0.2291, "IBR": 0.2239, "IPC": 0.121, "UVR": 0.0189, "Descuento": 0.0806, "Otros": 0.0}, "Por país": {"Colombia": 0.9369, "Estados Unidos": 0.0631, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.894, "Real": 0.0064, "Entidades públicas": 0.0996, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 0.918, "Dólar": 0.0631, "UVR": 0.0189, "Otros": 0}, "Por activo": {"Inversiones": 0.675, "Caja": 0.325, "Otros": 0.0}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": "Dólar", "posicion": 0.0631, "derivado": -0.0619, "neta": 0.0011}}}, {"Fondo": "FIC Abierto Rendir", "Participación": "Único", "Administrador/Gestor": "DAVIbank Fiduciaria S.A.", "Fecha de corte": "31/07/2026", "Tipo de fondo": "Abierto", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 436977.8, "Valor unidad": 57727.24, "Calificación": "F-AAA / vrM1 / 1+", "Calificadora": "Value and Risk Rating S.A.", "Gastos totales": 0.0174, "Remuneración efectivamente cobrada": 0.017, "Administración": 0.017, "Inversión inicial mínima (COP)": 200000, "Saldo mínimo (COP)": 200000, "Preaviso retiro (días)": "No aplica", "Días pacto permanencia": 0, "Sanción retiro anticipado": "No aplica", "Duración (años)": 0.33, "Plazo promedio incl. disponible (años)": 0.486, "Plazo promedio excl. disponible (años)": 0.616, "Plazo promedio incl. disponible (dias)": 177.31, "Plazo promedio excl. disponible (dias)": 224.99, "Rentabilidad último mes": 0.10649, "Rentabilidad últimos 6 meses": 0.10081, "Rentabilidad año corrido": 0.09012, "Rentabilidad último año": 0.07818, "Volatilidad último mes": 0.00229, "Volatilidad últimos 6 meses": 0.00388, "Volatilidad año corrido": 0.00389, "Volatilidad último año": 0.00383, "composicion": {"fuente": "Texto de la ficha", "Tipo de renta": {"Caja": 0.2148, "Tasa Fija": 0.596, "IBR": 0.1165, "IPC": 0.0726, "UVR": 0.0, "Descuento": 0.0, "Otros": 0.0}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.5498, "Real": 0.0, "Entidades públicas": 0.4502, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 1.0, "Dólar": 0.0, "UVR": 0.0, "Otros": 0}, "Por activo": {"Inversiones": 0.7852, "Caja": 0.2148, "Otros": 0.0}, "Liquidez": {"Cuenta de ahorros": 0.2107, "Cuenta corriente": 0.0041, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": "No reporta", "posicion": null, "derivado": null, "neta": null}}}, {"Fondo": "BBVA Efectivo", "Participación": "Clase A - 501", "Administrador/Gestor": "BBVA Asset Management S.A. Sociedad Fiduciaria", "Fecha de corte": "31/08/2026", "Tipo de fondo": "Abierto sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 5891077.57, "Valor unidad": 3904.919832, "Calificación": "S1/AAAf", "Calificadora": "Fitch Ratings", "Gastos totales": 0.018, "Remuneración efectivamente cobrada": 0.0164, "Administración": 0.0165, "Inversión inicial mínima (COP)": 50000, "Saldo mínimo (COP)": 20000, "Preaviso retiro (días)": "0 días", "Días pacto permanencia": 0, "Sanción retiro anticipado": "N.A.", "Duración (años)": 0.199, "Plazo promedio incl. disponible (años)": 0.245, "Plazo promedio excl. disponible (años)": 0.424, "Plazo promedio incl. disponible (dias)": 89.44, "Plazo promedio excl. disponible (dias)": 154.8, "Rentabilidad último mes": 0.10502, "Rentabilidad últimos 6 meses": 0.09856, "Rentabilidad año corrido": 0.09126, "Rentabilidad último año": 0.08217, "Volatilidad último mes": 0.00075, "Volatilidad últimos 6 meses": 0.00105, "Volatilidad año corrido": 0.00128, "Volatilidad último año": 0.00137, "composicion": {"fuente": "Texto de la ficha", "Tipo de renta": {"Caja": 0.42498, "Tasa Fija": 0.35255, "IBR": 0.06074, "IPC": 0.03924, "UVR": 0.0, "Descuento": 0.12249, "Otros": 0.0}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.87348, "Real": 0.0, "Entidades públicas": 0.12652, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 1.0, "Dólar": 0.0, "UVR": 0.0, "Otros": 0}, "Por activo": {"Inversiones": 0.57502, "Caja": 0.42497, "Otros": 1e-05}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": null, "posicion": 0.0, "derivado": 0.0, "neta": 0.0}}}, {"Fondo": "FIC Abierto BTG Pactual Liquidez", "Participación": "Clase A", "Administrador/Gestor": "BTG Pactual S.A. Comisionista de Bolsa", "Fecha de corte": "31/08/2026", "Tipo de fondo": "Abierto", "Código SFC": "58564-501", "Valor fondo (Mill COP)": 4780528.93, "Valor unidad": 30091.54, "Calificación": "S1/AAA", "Calificadora": "Fitch Ratings Colombia", "Gastos totales": 0.0092, "Remuneración efectivamente cobrada": 0.015, "Administración": 0.015, "Inversión inicial mínima (COP)": 1000000, "Saldo mínimo (COP)": 0, "Preaviso retiro (días)": "N.A.", "Días pacto permanencia": "N.A.", "Sanción retiro anticipado": "N.A.", "Duración (años)": 0.28, "Plazo promedio incl. disponible (años)": 0.38, "Plazo promedio excl. disponible (años)": 0.48, "Plazo promedio incl. disponible (dias)": 139.35, "Plazo promedio excl. disponible (dias)": 174.25, "Rentabilidad último mes": 0.12175, "Rentabilidad últimos 6 meses": 0.11618, "Rentabilidad año corrido": 0.10356, "Rentabilidad último año": 0.08961, "Volatilidad último mes": 0.00207, "Volatilidad últimos 6 meses": 0.00257, "Volatilidad año corrido": 0.00277, "Volatilidad último año": 0.00291, "composicion": {"fuente": "Texto de la ficha", "Tipo de renta": {"Caja": 0.20143, "Tasa Fija": 0.58742, "IBR": 0.08743, "IPC": 0.10035, "UVR": 0.0, "Descuento": 0.0, "Otros": 0.02337}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.50022, "Real": 0.00214, "Entidades públicas": 0.29621, "Financiero internacional": 0.0, "Otros": 0.20143}, "Por moneda": {"Peso": 1.0, "Dólar": 0.0, "UVR": 0.0, "Otros": 0}, "Por activo": {"Inversiones": 0.57799, "Caja": 0.20143, "Otros": 0.22058}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": 0.20143, "Repos / simultáneas": 0.22058}, "Exposición neta": {"instrumento": "No reporta", "posicion": null, "derivado": null, "neta": null}}}, {"Fondo": "Credicorp Capital Alta Liquidez", "Participación": "A", "Administrador/Gestor": "Credicorp Capital Colombia S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "FIC abierto sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 6946819.55, "Valor unidad": 6744.552136, "Calificación": "S1/AAAf (col)", "Calificadora": "Fitch Ratings", "Gastos totales": 0.0151, "Remuneración efectivamente cobrada": 0.0151, "Administración": 0.015, "Inversión inicial mínima (COP)": 500000, "Saldo mínimo (COP)": 500000, "Preaviso retiro (días)": "N.A.", "Días pacto permanencia": "N.A.", "Sanción retiro anticipado": "N.A.", "Duración (años)": 0.172, "Plazo promedio incl. disponible (años)": 0.346, "Plazo promedio excl. disponible (años)": 0.544, "Plazo promedio incl. disponible (dias)": 126.16, "Plazo promedio excl. disponible (dias)": 198.47, "Rentabilidad último mes": 0.10694, "Rentabilidad últimos 6 meses": 0.10257, "Rentabilidad año corrido": 0.09488, "Rentabilidad último año": 0.08563, "Volatilidad último mes": 0.00102, "Volatilidad últimos 6 meses": 0.00153, "Volatilidad año corrido": 0.0017, "Volatilidad último año": 0.00166, "composicion": {"fuente": "Etiquetas de gráfica (redondeadas a entero)", "Tipo de renta": {"Caja": 0.31, "Tasa Fija": 0.42, "IBR": 0.2, "IPC": 0.07, "UVR": 0.0, "Descuento": 0.0, "Otros": 0.0}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.58, "Real": 0.0, "Entidades públicas": 0.42, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 1.0, "Dólar": 0.0, "UVR": 0.0, "Otros": 0}, "Por activo": {"Inversiones": 0.46, "Caja": 0.36, "Otros": 0.18}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": 0.36, "Repos / simultáneas": 0.18}, "Exposición neta": {"instrumento": "Posición en dólares", "posicion": 0.0, "derivado": 0.0, "neta": 0.0}}}, {"Fondo": "Credicorp Capital Vista", "Participación": "A", "Administrador/Gestor": "Credicorp Capital Colombia S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "Abierto sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 1180298.87, "Valor unidad": 7726.778994, "Calificación": "S2/AAAF (Col)", "Calificadora": "Fitch Ratings", "Gastos totales": 0.0163, "Remuneración efectivamente cobrada": 0.0192, "Administración": 0.019, "Inversión inicial mínima (COP)": 0, "Saldo mínimo (COP)": 0, "Preaviso retiro (días)": "N.D. (en blanco en la ficha)", "Días pacto permanencia": "N.A.", "Sanción retiro anticipado": "N.A.", "Duración (años)": 0.361, "Plazo promedio incl. disponible (años)": 0.583, "Plazo promedio excl. disponible (años)": 0.758, "Plazo promedio incl. disponible (dias)": 212.75, "Plazo promedio excl. disponible (dias)": 276.77, "Rentabilidad último mes": 0.11406, "Rentabilidad últimos 6 meses": 0.10747, "Rentabilidad año corrido": 0.09441, "Rentabilidad último año": 0.08248, "Volatilidad último mes": 0.00175, "Volatilidad últimos 6 meses": 0.00267, "Volatilidad año corrido": 0.00304, "Volatilidad último año": 0.003, "composicion": {"fuente": "Etiquetas de gráfica (redondeadas a entero)", "Tipo de renta": {"Caja": 0.21, "Tasa Fija": 0.51, "IBR": 0.2, "IPC": 0.07, "UVR": 0.0, "Descuento": 0.0, "Otros": 0.01}, "Por país": {"Colombia": 0.98, "Estados Unidos": 0.02, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.65, "Real": 0.0, "Entidades públicas": 0.35, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 0.98, "Dólar": 0.02, "UVR": 0.0, "Otros": 0}, "Por activo": {"Inversiones": 0.67, "Caja": 0.23, "Otros": 0.1}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": 0.23, "Repos / simultáneas": 0.1}, "Exposición neta": {"instrumento": "Posición en dólares", "posicion": 0.0128, "derivado": -0.0121, "neta": 0.0007}}}, {"Fondo": "FIC Interés", "Participación": "Participación A (501)", "Administrador/Gestor": "Davivienda Corredores S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "FIC Abierto sin pacto de permanencia", "Código SFC": "501", "Valor fondo (Mill COP)": 4004689.85, "Valor unidad": 28651.7188, "Calificación": "F AAA / 1, BRC 1+", "Calificadora": "S&P Global National Ratings S.A.", "Gastos totales": 0.0006, "Remuneración efectivamente cobrada": 0.018, "Administración": 0.018, "Inversión inicial mínima (COP)": 5000000, "Saldo mínimo (COP)": 200000, "Preaviso retiro (días)": "1 día", "Días pacto permanencia": null, "Sanción retiro anticipado": null, "Duración (años)": 0.41, "Plazo promedio incl. disponible (años)": 0.5, "Plazo promedio excl. disponible (años)": 0.591, "Plazo promedio incl. disponible (dias)": 182.64, "Plazo promedio excl. disponible (dias)": 215.74, "Rentabilidad último mes": 0.10856, "Rentabilidad últimos 6 meses": 0.10019, "Rentabilidad año corrido": 0.09054, "Rentabilidad último año": 0.08031, "Volatilidad último mes": 0.00153, "Volatilidad últimos 6 meses": 0.00225, "Volatilidad año corrido": 0.00249, "Volatilidad último año": 0.00241, "composicion": {"fuente": "Texto de la ficha", "Tipo de renta": {"Caja": 0.1706, "Tasa Fija": 0.669, "IBR": 0.039, "IPC": 0.032, "UVR": 0.0, "Descuento": 0.0, "Otros": 0.0895}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.7868, "Real": 0.0, "Entidades públicas": 0.2132, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 0.9799, "Dólar": 0.0, "UVR": 0.0201, "Otros": 0}, "Por activo": {"Inversiones": 0.8294, "Caja": 0.1706, "Otros": 0.0}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": 0.1706, "Repos / simultáneas": 0.0895}, "Exposición neta": {"instrumento": "No realiza operaciones de esta clase", "posicion": null, "derivado": null, "neta": null}}}, {"Fondo": "FIC Valor Plus", "Participación": "TP2 - 506", "Administrador/Gestor": "Aval Fiduciaria S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "Abierta sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 1952667.79, "Valor unidad": 59370.689544, "Calificación": "1/AAA", "Calificadora": "BRC Investor Services S.A.", "Gastos totales": 0.0157, "Remuneración efectivamente cobrada": 0.015, "Administración": 0.015, "Inversión inicial mínima (COP)": 100000, "Saldo mínimo (COP)": 100000, "Preaviso retiro (días)": "1 día", "Días pacto permanencia": null, "Sanción retiro anticipado": null, "Duración (años)": 0.468, "Plazo promedio incl. disponible (años)": 0.711, "Plazo promedio excl. disponible (años)": 0.892, "Plazo promedio incl. disponible (dias)": 259.34, "Plazo promedio excl. disponible (dias)": 325.6, "Rentabilidad último mes": 0.11997, "Rentabilidad últimos 6 meses": 0.11439, "Rentabilidad año corrido": 0.09746, "Rentabilidad último año": 0.08464, "Volatilidad último mes": 0.00205, "Volatilidad últimos 6 meses": 0.00224, "Volatilidad año corrido": 0.00296, "Volatilidad último año": 0.00324, "composicion": {"fuente": "Texto de la ficha", "Tipo de renta": {"Caja": 0.20413, "Tasa Fija": 0.40202, "IBR": 0.13371, "IPC": 0.12698, "UVR": 0.00313, "Descuento": 0.13, "Otros": 4e-05}, "Por país": {"Colombia": 0.97462, "Estados Unidos": 0.0, "Otros": 0.02538}, "Por sector económico": {"Financiero": 0.83759, "Real": 0.0, "Entidades públicas": 0.16241, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 0.97149, "Dólar": 0.02538, "UVR": 0.00313, "Otros": 0}, "Por activo": {"Inversiones": 0.79631, "Caja": 0.20366, "Otros": 3e-05}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": "Forward de divisas USD", "posicion": 0.0254, "derivado": -0.0254, "neta": 0.0}}}, {"Fondo": "FIC Abierto Avanzar Vista", "Participación": "T.P. 3 No asociado a Coomeva 1", "Administrador/Gestor": "Fiduciaria Coomeva S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "FIC abierto sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 260472.69, "Valor unidad": 16593.697902, "Calificación": "S1/AAAf", "Calificadora": "Fitch Ratings Colombia S.A.", "Gastos totales": 0.0318, "Remuneración efectivamente cobrada": 0.0153, "Administración": 0.015, "Inversión inicial mínima (COP)": 200000, "Saldo mínimo (COP)": 200000, "Preaviso retiro (días)": "N.A.", "Días pacto permanencia": "N.A.", "Sanción retiro anticipado": "N.D. (en blanco en la ficha)", "Duración (años)": 0.315, "Plazo promedio incl. disponible (años)": 0.505, "Plazo promedio excl. disponible (años)": 0.708, "Plazo promedio incl. disponible (dias)": 184.166, "Plazo promedio excl. disponible (dias)": 258.261, "Rentabilidad último mes": 0.11717, "Rentabilidad últimos 6 meses": 0.10563, "Rentabilidad año corrido": 0.09018, "Rentabilidad último año": 0.07937, "Volatilidad último mes": 0.0027, "Volatilidad últimos 6 meses": 0.0027, "Volatilidad año corrido": 0.0035, "Volatilidad último año": 0.0034, "composicion": {"fuente": "Etiquetas de gráfica", "Tipo de renta": {"Caja": 0.288, "Tasa Fija": 0.3707, "IBR": 0.2616, "IPC": 0.0679, "UVR": 0.0, "Descuento": 0.0, "Otros": 0.0118}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 1.0, "Real": 0.0, "Entidades públicas": 0.0, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 1.0, "Dólar": 0.0, "UVR": 0.0, "Otros": 0}, "Por activo": {"Inversiones": 0.712, "Caja": 0.288, "Otros": 0.0}, "Liquidez": {"Cuenta de ahorros": null, "Cuenta corriente": null, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": "Sección sin datos en la ficha", "posicion": null, "derivado": null, "neta": null}}}, {"Fondo": "Fiducuenta", "Participación": "Tipo C", "Administrador/Gestor": "Fiduciaria Bancolombia S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "FIC Abierto Sin Pacto de Permanencia", "Código SFC": "2852-8-00", "Valor fondo (Mill COP)": 25357358.57, "Valor unidad": 48076.063716, "Calificación": "S1/AAAf(col)", "Calificadora": "Fitch Ratings Colombia S.A. SCV", "Gastos totales": 0.0154, "Remuneración efectivamente cobrada": 0.0151, "Administración": 0.0151, "Inversión inicial mínima (COP)": 50000, "Saldo mínimo (COP)": 1, "Preaviso retiro (días)": "3 días hábiles", "Días pacto permanencia": "N.A.", "Sanción retiro anticipado": "N.A.", "Duración (años)": 0.375, "Plazo promedio incl. disponible (años)": 0.567, "Plazo promedio excl. disponible (años)": 0.82, "Plazo promedio incl. disponible (dias)": 207.039, "Plazo promedio excl. disponible (dias)": 299.203, "Rentabilidad último mes": 0.12493, "Rentabilidad últimos 6 meses": 0.11602, "Rentabilidad año corrido": 0.10412, "Rentabilidad último año": 0.08759, "Volatilidad último mes": 0.00244, "Volatilidad últimos 6 meses": 0.00271, "Volatilidad año corrido": 0.00354, "Volatilidad último año": 0.00401, "composicion": {"fuente": "Etiquetas de gráfica", "Tipo de renta": {"Caja": 0.3091, "Tasa Fija": 0.4501, "IBR": 0.0994, "IPC": 0.0673, "UVR": 0.0414, "Descuento": 0.0328, "Otros": 0.0}, "Por país": {"Colombia": 0.8277, "Estados Unidos": 0.1392, "Otros": 0.0331}, "Por sector económico": {"Financiero": 0.7273, "Real": 0.0021, "Entidades públicas": 0.2182, "Financiero internacional": 0.0523, "Otros": 0.0}, "Por moneda": {"Peso": 0.7828, "Dólar": 0.1758, "UVR": 0.0414, "Otros": 0}, "Por activo": {"Inversiones": 0.6954, "Caja": 0.3046, "Otros": 0.0}, "Liquidez": {"Cuenta de ahorros": 0.3019, "Cuenta corriente": 0.0072, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": "Dólar [NDF venta] - ver notas", "posicion": 0.1758, "derivado": -0.1717, "neta": 0.0041}}}, {"Fondo": "FIC Abierto Efectivo a la Vista", "Participación": "Part. 6 - Tradicional", "Administrador/Gestor": "Fiduciaria La Previsora S.A.", "Fecha de corte": "31/08/2026", "Tipo de fondo": "Fondo abierto, sin pacto de permanencia", "Código SFC": "N.D.", "Valor fondo (Mill COP)": 1322068.14, "Valor unidad": 3889.332669, "Calificación": "F AAA/1, BRC 1+", "Calificadora": "BRC Ratings - S&P Global S.A. SCV", "Gastos totales": 0.0162, "Remuneración efectivamente cobrada": 0.016, "Administración": 0.016, "Inversión inicial mínima (COP)": 200000, "Saldo mínimo (COP)": 200000, "Preaviso retiro (días)": "No existe", "Días pacto permanencia": null, "Sanción retiro anticipado": null, "Duración (años)": 0.426, "Plazo promedio incl. disponible (años)": 0.426, "Plazo promedio excl. disponible (años)": 0.63, "Plazo promedio incl. disponible (dias)": 155.56, "Plazo promedio excl. disponible (dias)": 229.92, "Rentabilidad último mes": 0.11019, "Rentabilidad últimos 6 meses": 0.10644, "Rentabilidad año corrido": 0.09222, "Rentabilidad último año": 0.08218, "Volatilidad último mes": 0.0013, "Volatilidad últimos 6 meses": 0.0016, "Volatilidad año corrido": 0.0021, "Volatilidad último año": 0.0023, "composicion": {"fuente": "Etiquetas de gráfica", "Tipo de renta": {"Caja": 0.3248, "Tasa Fija": 0.417, "IBR": 0.1002, "IPC": 0.0505, "UVR": 0.0096, "Descuento": 0.0, "Otros": 0.0979}, "Por país": {"Colombia": 1.0, "Estados Unidos": 0.0, "Otros": 0.0}, "Por sector económico": {"Financiero": 0.8431, "Real": 0.0037, "Entidades públicas": 0.1532, "Financiero internacional": 0.0, "Otros": 0.0}, "Por moneda": {"Peso": 0.9904, "Dólar": 0.0, "UVR": 0.0096, "Otros": 0}, "Por activo": {"Inversiones": 0.6752, "Caja": 0.3248, "Otros": 0.0}, "Liquidez": {"Cuenta de ahorros": 0.3248, "Cuenta corriente": null, "Efectivo": null, "Repos / simultáneas": null}, "Exposición neta": {"instrumento": "No realiza operaciones de esta clase", "posicion": null, "derivado": null, "neta": null}}}], "notas": [{"tema": "Alcance", "detalle": "11 fondos, una fila por fondo, con la participación indicada en las particularidades."}, {"tema": "Davibank: fecha de corte", "detalle": "La ficha de Davibank Rendir está cortada a 31/07/2026, no a 31/08/2026 como las otras diez. Los datos no son comparables mes a mes."}, {"tema": "Davibank: valor del fondo", "detalle": "La ficha dice \"Valor Fondo de Inversión Colectiva (Mil COP): 436.977,80\". Unidades en circulación x valor unidad = ~437.000 millones, así que la cifra está en MILLONES y el rótulo de la ficha está mal. Se cargó como 436.977,80 Mill COP."}, {"tema": "Davivienda Interés: gastos totales", "detalle": "La ficha reporta gastos totales de 0,06% para la Participación A, por debajo de la remuneración efectivamente cobrada (1,80%). Es inconsistente pero se transcribió tal cual. Vale la pena confirmarlo con la administradora."}, {"tema": "Fiducoomeva: gastos totales", "detalle": "3,18% para la T.P. 3, frente a una remuneración de 1,53%. Es el gasto total más alto de la muestra; verificar si incluye algún rubro extraordinario."}, {"tema": "BTG: gastos totales", "detalle": "0,92% igual para las seis clases, aunque la administración va de 0,00% a 1,50%. Así viene en la ficha."}, {"tema": "Composición leída de gráficas", "detalle": "Credicorp Vista, Credicorp Alta Liquidez, Fiducoomeva, Fiducuenta y Fiduprevisora no traen los porcentajes en tabla; se leyeron de las etiquetas de las tortas. Las dos de Credicorp vienen redondeadas a entero, por eso suman 100% exacto pero tienen menor precisión. La columna \"Fuente de la composición\" marca cada caso."}, {"tema": "Fiducuenta: sector", "detalle": "La ficha separa \"Entidades públicas\" (9,82%) de \"Entidades públicas internacional\" (12,00%). Se sumaron en la columna Entidades públicas (21,82%). \"Financiero internacional\" (5,23%) sí tiene columna propia."}, {"tema": "Fiducuenta: exposición neta", "detalle": "Tiene tres líneas: Tasa Fija (swaps) 45,01/0,44/45,45, IBR (swaps) 9,94/-0,44/9,50 y Dólar (NDF venta) 17,58/-17,17/0,41. En la tabla se cargó la línea de Dólar, que es la única exposición cambiaria; las dos de swaps de tasa quedan aquí."}, {"tema": "Fiducuenta: volatilidad", "detalle": "El texto de la ficha viene desordenado. La lectura usada es: mes 0,244%, 6 meses 0,271%, año corrido 0,354%, último año 0,401%. Conviene confirmarla contra el PDF original."}, {"tema": "Bloque Liquidez", "detalle": "Solo seis fondos permiten llenarlo. Davibank, Fiducuenta y Fiduprevisora separan cuenta de ahorros/corriente dentro de \"tipo de renta\"; BTG, Credicorp (x2) y Davivienda Interés separan disponible y simultáneas dentro de \"composición del activo\". El denominador no es idéntico entre los dos grupos."}, {"tema": "Simultáneas y repos", "detalle": "En \"Tipo de renta\" las simultáneas van a Otros (Davivienda Interés 8,95%). En \"Por activo\" van a Otros. En el bloque Liquidez tienen columna propia."}, {"tema": "Código SFC", "detalle": "Solo aparece en Fiducuenta (2852-8-00), BTG Clase A (58564-501) y Davivienda Interés (501). En los demás quedó N.D."}, {"tema": "Saldo mínimo Skandia", "detalle": "La ficha dice \">1\", no un número. Se dejó como texto."}, {"tema": "Credicorp Vista: preaviso", "detalle": "La fila \"Tiempo de preaviso para retiro\" viene vacía en la ficha para todas las participaciones."}, {"tema": "Fiducoomeva: sanción", "detalle": "La fila \"Sanción por retiro anticipado\" viene vacía en la ficha."}, {"tema": "Columnas de control", "detalle": "Al final de la hoja Composición hay cinco columnas Σ que suman cada bloque. Deben dar ~100%. Aval da 100,001% y Fiducuenta 100,01% por redondeo de las propias fichas."}]};
-const F = DATA.funds;
-const NOTAS = DATA.notas;
-const PAL = ['#0E2240','#1F3E66','#2F5C8A','#3A6FA8','#5C90C4','#7FA8CF','#00703C','#00A651','#4FC17E','#F08C1E','#B0752E'];
-const CAT = ['#0E2240','#2F5C8A','#3A6FA8','#7FA8CF','#00703C','#00A651','#4FC17E','#F08C1E'];
+const FONDOS = [{"fondo":"FIC Skandia Efectivo","participacion":"Tipo D - 503","admin":"Skandia Fiduciaria S.A.","corte":"31/08/2026","valor":1551740.73,"administracion":0.015,"r1m":0.11428,"r6m":0.11334,"rytd":0.10187,"r1a":0.08772,"v1m":0.00159,"v6m":0.00307,"vytd":0.00364,"v1a":0.00384,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"BBVA Efectivo","participacion":"Clase A - 501","admin":"BBVA Asset Management S.A. Sociedad Fiduciaria","corte":"31/08/2026","valor":5891077.57,"administracion":0.0165,"r1m":0.10502,"r6m":0.09856,"rytd":0.09126,"r1a":0.08217,"v1m":0.00075,"v6m":0.00105,"vytd":0.00128,"v1a":0.00137,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Credicorp Capital Alta Liquidez","participacion":"A","admin":"Credicorp Capital Colombia S.A.","corte":"31/08/2026","valor":6946819.55,"administracion":0.015,"r1m":0.10694,"r6m":0.10257,"rytd":0.09488,"r1a":0.08563,"v1m":0.00102,"v6m":0.00153,"vytd":0.0017,"v1a":0.00166,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Credicorp Capital Vista","participacion":"A","admin":"Credicorp Capital Colombia S.A.","corte":"31/08/2026","valor":1180298.87,"administracion":0.019,"r1m":0.11406,"r6m":0.10747,"rytd":0.09441,"r1a":0.08248,"v1m":0.00175,"v6m":0.00267,"vytd":0.00304,"v1a":0.003,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Avanzar Vista","participacion":"T.P. 3 No asociado a Coomeva 1","admin":"Fiduciaria Coomeva S.A.","corte":"31/08/2026","valor":260472.69,"administracion":0.015,"r1m":0.11717,"r6m":0.10563,"rytd":0.09018,"r1a":0.07937,"v1m":0.0027,"v6m":0.0027,"vytd":0.0035,"v1a":0.0034,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto BTG Pactual Liquidez","participacion":"Clase A","admin":"BTG Pactual S.A. Comisionista de Bolsa","corte":"31/08/2026","valor":4780528.93,"administracion":0.015,"r1m":0.12175,"r6m":0.11618,"rytd":0.10356,"r1a":0.08961,"v1m":0.00207,"v6m":0.00257,"vytd":0.00277,"v1a":0.00291,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Efectivo a la Vista","participacion":"Part. 6 - Tradicional","admin":"Fiduciaria La Previsora S.A.","corte":"31/08/2026","valor":1322068.14,"administracion":0.016,"r1m":0.11019,"r6m":0.10644,"rytd":0.09222,"r1a":0.08218,"v1m":0.0013,"v6m":0.0016,"vytd":0.0021,"v1a":0.0023,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Fidugob","participacion":"TP 1 - Inversionista I","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":5810236.55,"administracion":0.014,"r1m":0.11878,"r6m":0.11371,"rytd":0.09544,"r1a":0.08442,"v1m":0.00199,"v6m":0.00236,"vytd":0.0032,"v1a":0.00344,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Fidugob permite inversiones con vencimientos de hasta 15 años, frente a un máximo de 2 años en FIC Efectivo. Fidugob puede invertir hasta un 20% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Occirenta","participacion":"Tipo 8. NEG FID II - 508","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":3665194.2,"administracion":0.015,"r1m":0.11948,"r6m":0.11447,"rytd":0.09453,"r1a":0.08266,"v1m":0.00186,"v6m":0.00239,"vytd":0.00352,"v1a":0.00387,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Occirenta permite invertir en instrumentos con vencimientos de hasta 30 años, frente al máximo de 2 años establecido para FIC Efectivo. FIC Occirenta contempla una duración promedio de hasta 5 años, significativamente superior al 1 año de FIC Efectivo. FIC Occirenta puede invertir hasta un 10% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Rendir","participacion":"Único","admin":"DAVIbank Fiduciaria S.A.","corte":"31/07/2026","valor":436977.8,"administracion":0.017,"r1m":0.10649,"r6m":0.10081,"rytd":0.09012,"r1a":0.07818,"v1m":0.00229,"v6m":0.00388,"vytd":0.00389,"v1a":0.00383,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Sumar","participacion":"TP 9 - Admon III","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":6371449.81,"administracion":0.014,"r1m":0.11713,"r6m":0.11511,"rytd":0.09786,"r1a":0.08635,"v1m":0.002,"v6m":0.00227,"vytd":0.00305,"v1a":0.00326,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Sumar permite invertir en instrumentos con vencimientos de hasta 15 años, frente al máximo de 2 años establecido para FIC Efectivo. FIC Sumar puede mantener hasta un 20% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Superior","participacion":"Tipo de participación S2","admin":"Fiduciaria Davivienda S.A.","corte":"31/08/2026","valor":8841193.4,"administracion":0.015,"r1m":0.1118,"r6m":0.11016,"rytd":0.10053,"r1a":0.08494,"v1m":0.00144,"v6m":0.00235,"vytd":0.00331,"v1a":0.00378,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Superior puede invertir hasta un 30% en renta variable, mientras que FIC Efectivo concentra sus inversiones exclusivamente en renta fija. FIC Superior permite hasta un 40% de las inversiones en moneda extranjera y hasta un 20% en participaciones de FIC extranjeros; en FIC Efectivo, la exposición en moneda extranjera está limitada al 20% y no se permiten inversiones en otros FIC. FIC Superior establece un plazo promedio ponderado máximo 1.5 años, en FIC Efectivo es máximo 1 año."},{"fondo":"FIC Interés","participacion":"Participación A (501)","admin":"Davivienda Corredores S.A.","corte":"31/08/2026","valor":4004689.85,"administracion":0.018,"r1m":0.10856,"r6m":0.10019,"rytd":0.09054,"r1a":0.08031,"v1m":0.00153,"v6m":0.00225,"vytd":0.00249,"v1a":0.00241,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Valor Plus","participacion":"TP2 - 506","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":1952667.79,"administracion":0.015,"r1m":0.11997,"r6m":0.11439,"rytd":0.09746,"r1a":0.08464,"v1m":0.00205,"v6m":0.00224,"vytd":0.00296,"v1a":0.00324,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Fiducuenta","participacion":"Tipo C","admin":"Fiduciaria Bancolombia S.A.","corte":"31/08/2026","valor":25357358.57,"administracion":0.0151,"r1m":0.12493,"r6m":0.11602,"rytd":0.10412,"r1a":0.08759,"v1m":0.00244,"v6m":0.00271,"vytd":0.00354,"v1a":0.00401,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"Fiducuenta puede invertir hasta un 30% en ETF y otros FIC, mientras que FIC Efectivo no contempla este tipo de activos. Fiducuenta puede utilizar instrumentos derivados con fines de inversión hasta por el 40% del portafolio, FIC Efectivo solo puede hacer derivados con fines de cobertura. Fiducuenta permite inversiones de hasta 7 años, con un plazo promedio ponderado de hasta 2 años, frente a los 2 años y 1 año, respectivamente, de FIC Efectivo"},{"fondo":"Fondo Abierto Alianza","participacion":"Corporativos B","admin":"Alianza Fiduciaria S.A.","corte":"31/08/2026","valor":9311842.01,"administracion":0.0127,"r1m":0.12381,"r6m":0.11603,"rytd":0.10281,"r1a":0.08958,"v1m":0.00161,"v6m":0.00247,"vytd":0.00294,"v1a":0.00292,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"Fondo Abierto Alianza puede invertir hasta un 5% en ETF de largo plazo y hasta un 20% en FIC de renta fija local; FIC Efectivo no contempla estas alternativas de inversión. FIC Abierto permite inversiones con vencimientos de hasta 30 años, en FIC Efectivo, el plazo máximo de inversión es de 2 años. FIC Abierto Alianza establece un plazo promedio ponderado máximo de 3 años, frente a 1 año en FIC Efectivo."},{"fondo":"FIC Skandia Multiplazo","participacion":"Tipo D3 - 533","admin":"Skandia Fiduciaria S.A.","corte":"31/08/2026","valor":82893.08,"administracion":0.014,"r1m":0.12882,"r6m":0.13843,"rytd":0.10463,"r1a":0.08286,"v1m":0.00685,"v6m":0.00936,"vytd":0.00995,"v1a":0.01051,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"BBVA Plazo 30","participacion":"Clase A - 801","admin":"BBVA Asset Management S.A. Sociedad Fiduciaria","corte":"31/08/2026","valor":48074.41,"administracion":0.015,"r1m":0.13231,"r6m":0.12575,"rytd":0.10048,"r1a":0.07776,"v1m":0.00685,"v6m":0.00696,"vytd":0.00757,"v1a":0.00875,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Altarenta","participacion":"TP 1 - Inversionista I","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":91206.63,"administracion":0.015,"r1m":0.13435,"r6m":0.13926,"rytd":0.09329,"r1a":0.08053,"v1m":0.00395,"v6m":0.006,"vytd":0.01057,"v1a":0.01067,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Rentar","participacion":"TP Otros Inversionistas - 535","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":407319.82,"administracion":0.015,"r1m":0.11459,"r6m":0.10951,"rytd":0.09326,"r1a":0.08263,"v1m":0.00188,"v6m":0.00207,"vytd":0.00272,"v1a":0.00285,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Renta Fija Mediano Plazo - Multiescala","participacion":"Participación A (501)","admin":"Davivienda Corredores S.A.","corte":"31/08/2026","valor":258540.38,"administracion":0.015,"r1m":0.12872,"r6m":0.16735,"rytd":0.11942,"r1a":0.08594,"v1m":0.00921,"v6m":0.02124,"vytd":0.02036,"v1a":0.01905,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""}];
+/* ============ estado ============ */
+const REFS = [...new Set(FONDOS.map(d => d.ref))];   // fondos de referencia, salen del archivo
+let grupo = REFS[0], per = '1a', sortK = 'r1a', sortDir = -1;
 
-F.forEach((f,i)=>{f._i=i; f._color=PAL[i%PAL.length]; f._on=true;
-  f.corto = f.Fondo.replace(/^FIC (Abierto )?/,'').replace(/ - .*/,'');});
-
-/* ------- iconos y píldoras de sección ------- */
-const ICO={
- tabla:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
- riesgo:'<circle cx="7" cy="16" r="2.4"/><circle cx="13" cy="9" r="2.4"/><circle cx="19" cy="13" r="2.4"/><path d="M3 21V3"/>',
- costos:'<path d="M19 5 5 19"/><circle cx="7.5" cy="7.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/>',
- composicion:'<path d="M12 3a9 9 0 1 0 9 9h-9V3z"/><path d="M14 2.5A9 9 0 0 1 21.5 10H14V2.5z"/>',
- ficha:'<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 12h7M9 16h7"/>',
- notas:'<path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/>'};
-function pill(t,ico,tone){
-  return `<div class="pill ${tone}"><span class="pi" style="color:var(--${tone==='green'?'green-dk':'navy'})">
-   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICO[ico]}</svg>
-  </span>${t}</div>`;
-}
-
-/* ------- utilidades ------- */
-const pct=(v,d=2)=> v==null||isNaN(v) ? '—' : (v*100).toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d})+'%';
-const mil=(v,d=0)=> v==null||isNaN(v) ? '—' : Number(v).toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d});
-const cop=v=> typeof v==='number' ? '$'+mil(v) : (v??'—');
-const txt=v=> (v==null||v==='') ? '—' : String(v);
-const sel=()=>F.filter(f=>f._on);
-const tip=document.getElementById('tip');
-function showTip(e,html){tip.innerHTML=html;tip.style.opacity=1;moveTip(e);}
-function moveTip(e){const r=tip.getBoundingClientRect();let x=e.clientX+14,y=e.clientY+16;
-  if(x+r.width>innerWidth-8)x=e.clientX-r.width-14; if(y+r.height>innerHeight-8)y=e.clientY-r.height-14;
-  tip.style.left=x+'px';tip.style.top=y+'px';}
-function hideTip(){tip.style.opacity=0;}
-document.addEventListener('mousemove',e=>{if(tip.style.opacity==1&&!e.target.closest('[data-tip]'))hideTip();});
-document.addEventListener('mouseover',e=>{const t=e.target.closest('[data-tip]');if(t)showTip(e,t.dataset.tip);});
-
-const WIN={mes:['Rentabilidad último mes','Volatilidad último mes','último mes'],
-  s6:['Rentabilidad últimos 6 meses','Volatilidad últimos 6 meses','últimos 6 meses'],
-  ac:['Rentabilidad año corrido','Volatilidad año corrido','año corrido'],
-  y1:['Rentabilidad último año','Volatilidad último año','último año']};
-let win='y1';
-
-/* ------- lista de fondos ------- */
-const flist=document.getElementById('flist');
-function drawList(){
-  flist.innerHTML = F.map(f=>`<label class="frow ${f._on?'':'off'}" data-i="${f._i}">
-    <input type="checkbox" ${f._on?'checked':''}>
-    <span class="swatch" style="background:${f._color}"></span>
-    <span><span class="fn">${f.corto}</span><span class="fa">${f['Administrador/Gestor'].replace(/ (S\.A\.|S\.A).*/,'')}</span></span></label>`).join('');
-}
-flist.addEventListener('change',e=>{
-  const row=e.target.closest('.frow'); F[+row.dataset.i]._on=e.target.checked; drawList(); render();});
-document.getElementById('toggleAll').onclick=e=>{
-  const any=F.some(f=>f._on); F.forEach(f=>f._on=!any);
-  e.target.textContent = any?'Todos':'Ninguno'; drawList(); render();};
-
-/* ------- KPIs ------- */
-const KICO={fondos:'<path d="M3 7h18v13H3z"/><path d="M8 7V4h8v3"/>',
- aum:'<path d="M4 20V9M10 20V4M16 20v-8M22 20H2"/>',
- rango:'<path d="M3 17 9 11l4 4 8-8"/><path d="M21 7h-5m5 0v5"/>',
- top:'<path d="M12 3l2.6 5.6 6.4.8-4.7 4.3 1.3 6.3L12 17l-5.6 3 1.3-6.3L3 9.4l6.4-.8L12 3z"/>',
- costo:'<circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.6-3-1.6-1.8 0-3 1-3 2.2 0 2.8 6 1.4 6 4.2 0 1.3-1.3 2.2-3 2.2-1.4 0-2.5-.6-3-1.6M12 6.4v11.2"/>'};
-function kpi(tone,ico,label,value){
-  return `<div class="kpi ${tone}"><span class="ico"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${KICO[ico]}</svg></span>
-   <span class="sep"></span><span class="t"><span>${label}</span><b>${value}</b></span></div>`;}
-function drawKpis(){
-  const s=sel(); const k=document.getElementById('kpis');
-  if(!s.length){k.innerHTML=kpi('navy','fondos','Fondos seleccionados','0');return;}
-  const aum=s.reduce((a,f)=>a+f['Valor fondo (Mill COP)'],0);
-  const rs=s.map(f=>f[WIN[win][0]]), gs=s.map(f=>f['Gastos totales']);
-  const best=s[rs.indexOf(Math.max(...rs))], cheap=s[gs.indexOf(Math.min(...gs))];
-  k.innerHTML=
-    kpi('green','fondos','Fondos seleccionados',s.length)+
-    kpi('navy','aum','Activos sumados (COP)','$'+mil(aum/1e6,2)+' bill.')+
-    kpi('blue','rango','Rango rentabilidad '+WIN[win][2],pct(Math.min(...rs))+' – '+pct(Math.max(...rs)))+
-    kpi('green','top','Mayor rentabilidad '+WIN[win][2],best.corto)+
-    kpi('amber','costo','Menor gasto total reportado',cheap.corto+' · '+pct(cheap['Gastos totales'])+(FLAGS[cheap.Fondo]?' <span class="flag" data-tip="'+FLAGS[cheap.Fondo]+'">!</span>':''));
-}
-
-/* ------- comparador ------- */
-const COLS={
- rent:[['Rentabilidad último mes','Mes',pct,1],['Rentabilidad últimos 6 meses','6 meses',pct,1],
-   ['Rentabilidad año corrido','Año corrido',pct,1],['Rentabilidad último año','12 meses',pct,1]],
- riesgo:[['Volatilidad último mes','Vol. mes',v=>pct(v,3),-1,'neg'],['Volatilidad últimos 6 meses','Vol. 6 m',v=>pct(v,3),-1,'neg'],
-   ['Volatilidad año corrido','Vol. año corrido',v=>pct(v,3),-1,'neg'],['Volatilidad último año','Vol. 12 m',v=>pct(v,3),-1,'neg'],
-   ['_ratio','Rent. ÷ vol. 12 m',v=>mil(v,1),1],['Duración (años)','Duración (años)',v=>mil(v,3),0],
-   ['Plazo promedio incl. disponible (dias)','Plazo prom. (días)',v=>mil(v,0),0]],
- costos:[['Gastos totales','Gastos totales',v=>pct(v,2),-1,'neg'],['Remuneración efectivamente cobrada','Remuneración',v=>pct(v,2),-1,'neg'],
-   ['Administración','Administración',v=>pct(v,2),-1,'neg']],
- acceso:[['Inversión inicial mínima (COP)','Inversión mínima',cop,-1,'neg'],['Saldo mínimo (COP)','Saldo mínimo',cop,0],
-   ['Preaviso retiro (días)','Preaviso',txt,0],['Calificación','Calificación',txt,0],['Fecha de corte','Corte',txt,0]],
- tamano:[['Valor fondo (Mill COP)','Activos (Mill COP)',v=>mil(v,0),1],['Valor unidad','Valor unidad',v=>mil(v,2),0]]
+const f = {
+  pct: v => v == null ? '—' : (v * 100).toFixed(2).replace('.', ',') + '%',
+  pct1: v => v == null ? '—' : (v * 100).toFixed(1).replace('.', ',') + '%',
+  mill: v => v == null ? '—' : v.toLocaleString('es-CO', { maximumFractionDigits: 0 }),
+  dias: v => v == null ? '—' : v.toLocaleString('es-CO', { maximumFractionDigits: 0 }) + ' días',
+  bps: v => (v >= 0 ? '+' : '−') + Math.abs(v * 10000).toFixed(0) + ' pb'
 };
-let group='rent', sortKey='Rentabilidad último año', sortDir=-1;
-F.forEach(f=>f._ratio = f['Volatilidad último año'] ? f['Rentabilidad último año']/f['Volatilidad último año'] : null);
+const all = () => FONDOS;
+const groupOf = g => all().filter(d => d.ref === g);
+const baseName = () => grupo;
+const base = () => all().find(d => d.fondo === baseName());
+const rKey = p => 'r' + p, vKey = p => 'v' + p;
+// parte el argumento en viñetas: corta en cada punto seguido de espacio
+const vinetas = t => {
+  const partes = String(t).split(/(?<=\.)\s+/).map(x => x.trim()).filter(Boolean)
+    .map(x => /[.!?]$/.test(x) ? x : x + '.');
+  return partes.length < 2 ? `<p>${partes[0] || t}</p>`
+    : '<ul>' + partes.map(x => `<li>${x}</li>`).join('') + '</ul>';
+};
+const perLabel = { '1m': 'último mes', '6m': 'últimos 6 meses', 'ytd': 'año corrido', '1a': 'último año' };
 
-const FLAGS={'FIC Abierto Rendir':'Corte a 31/07/2026, no comparable mes a mes con el resto.',
- 'FIC Interés':'Gastos totales (0,06%) por debajo de la remuneración cobrada (1,80%): inconsistencia de la ficha.',
- 'FIC Abierto Avanzar Vista':'Gasto total más alto de la muestra (3,18%) frente a 1,53% de remuneración.',
- 'FIC Abierto BTG Pactual Liquidez':'0,92% de gastos igual para las seis clases, según la ficha.',
- 'Fiducuenta':'Volatilidad y sector reconstruidos del texto de la ficha; conviene verificar contra el PDF.'};
-
-function viewTabla(){
-  const s=sel(); const cols=COLS[group];
-  const head=pill('Comparador','tabla','navy')+
-   `<p class="lead">Ordene por cualquier columna. La barra dentro de cada celda muestra la posición del fondo frente al mejor y al peor de la selección; en verde el mejor valor y en rojo el peor.</p>
-    <div class="controls"><span class="seg">${Object.entries({rent:'Rentabilidad',riesgo:'Riesgo y plazo',costos:'Costos',acceso:'Acceso y condiciones',tamano:'Tamaño'})
-      .map(([k,v])=>`<button data-group="${k}" aria-pressed="${group===k}">${v}</button>`).join('')}</span></div>`;
-  if(!s.length)return head+'<p class="lead">Seleccione al menos un fondo en el panel izquierdo.</p>';
-  const rng={}; cols.forEach(c=>{const v=s.map(f=>f[c[0]]).filter(x=>typeof x==='number');
-    if(v.length)rng[c[0]]=[Math.min(...v),Math.max(...v)];});
-  const sorted=[...s].sort((a,b)=>{let x=a[sortKey],y=b[sortKey];
-    if(typeof x==='number'&&typeof y==='number')return (x-y)*sortDir;
-    return String(x??'').localeCompare(String(y??''))*sortDir;});
-  return head+`<div class="tablescroll"><table><thead><tr><th data-k="Fondo">FONDO</th>
-   ${cols.map(c=>`<th data-k="${c[0]}" class="${sortKey===c[0]?'sorted':''}">${c[1].toUpperCase()}${sortKey===c[0]?(sortDir<0?' ↓':' ↑'):''}</th>`).join('')}</tr></thead>
-  <tbody>${sorted.map(f=>`<tr><td><span class="fname">${f.corto}</span>${FLAGS[f.Fondo]?`<span class="flag" data-tip="${FLAGS[f.Fondo]}">!</span>`:''}
-    <span class="fadmin">${f['Administrador/Gestor'].replace(/ S\.A\..*| S\.A\.$/,'')} · ${txt(f['Participación'])}</span></td>
-   ${cols.map(c=>{const v=f[c[0]];
-     if(typeof v!=='number')return `<td>${c[2](v)}</td>`;
-     const [mn,mx]=rng[c[0]];const w=mx===mn?100:((v-mn)/(mx-mn))*100;
-     const good=c[3]===1?v===mx:c[3]===-1?v===mn:false;
-     const bad=c[3]===1?v===mn:c[3]===-1?v===mx:false;
-     return `<td><span class="barcell"><span class="bar ${c[4]||''}" style="width:${Math.max(w,2)}%"></span><span class="v ${good?'best':''}${bad?'worst':''}">${c[2](v)}</span></span></td>`;}).join('')}
-  </tr>`).join('')}</tbody></table></div>`;
+/* ============ filtros ============ */
+function filtered() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const a = document.getElementById('fAdmin').value;
+  const only = document.getElementById('onlyComp').checked;
+  return groupOf(grupo).filter(d => {
+    if (q && !(d.fondo + ' ' + d.admin).toLowerCase().includes(q)) return false;
+    if (a && d.admin !== a) return false;
+    if (only && d.comparable !== 'SI') return false;
+    return true;
+  });
 }
+const colorOf = d => d.fondo === baseName() ? '#00A34A' : d.comparable === 'SI' ? '#17375E' : '#C6D2DC';
 
-/* ------- riesgo y retorno ------- */
-function winControl(){
-  return `<div class="controls"><label for="winsel">Ventana</label>
-   <select id="winsel">${Object.entries(WIN).map(([k,v])=>`<option value="${k}" ${win===k?'selected':''}>${v[2][0].toUpperCase()+v[2].slice(1)}</option>`).join('')}</select></div>`;
-}
-function viewRiesgo(){
-  const s=sel();
-  const head=pill('Riesgo y retorno','riesgo','navy')+
-    '<p class="lead">Cada burbuja es un fondo y su tamaño corresponde al valor de los activos. Arriba y a la izquierda es mejor: más rentabilidad con menos volatilidad.</p>'+winControl();
-  if(!s.length)return head+'<p class="lead">Seleccione al menos un fondo en el panel izquierdo.</p>';
-  const [rk,vk,lab]=WIN[win];
-  const W=760,H=440,m={t:20,r:30,b:56,l:70};
-  const xs=s.map(f=>f[vk]), ys=s.map(f=>f[rk]);
-  const x0=Math.min(...xs)*0.85,x1=Math.max(...xs)*1.12,y0=Math.min(...ys)-0.0035,y1=Math.max(...ys)+0.0035;
-  const X=v=>m.l+(v-x0)/(x1-x0)*(W-m.l-m.r), Y=v=>H-m.b-(v-y0)/(y1-y0)*(H-m.t-m.b);
-  const maxA=Math.max(...s.map(f=>f['Valor fondo (Mill COP)']));
-  const R=a=>7+Math.sqrt(a/maxA)*20;
-  let g='';
-  for(let i=0;i<=4;i++){const v=y0+(y1-y0)*i/4;g+=`<line class="grid" x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axlabel" x="${m.l-8}" y="${Y(v)+4}" text-anchor="end">${pct(v,2)}</text>`;}
-  for(let i=0;i<=4;i++){const v=x0+(x1-x0)*i/4;g+=`<line class="grid" x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H-m.b}"/><text class="axlabel" x="${X(v)}" y="${H-m.b+18}" text-anchor="middle">${pct(v,3)}</text>`;}
-  const pts=s.map(f=>{const cx=X(f[vk]),cy=Y(f[rk]),r=R(f['Valor fondo (Mill COP)']);
-    return `<g class="pt" data-tip="<b>${f.Fondo}</b><br>Rentabilidad ${lab}: ${pct(f[rk])}<br>Volatilidad ${lab}: ${pct(f[vk],3)}<br>Activos: ${mil(f['Valor fondo (Mill COP)'])} Mill COP<br>Gastos: ${pct(f['Gastos totales'])}">
-      <circle cx="${cx}" cy="${cy}" r="${r}" fill="${f._color}" fill-opacity=".32" stroke="${f._color}" stroke-width="1.8"/>
-      <text class="ptlabel" x="${cx}" y="${cy-r-6}" text-anchor="middle">${f.corto}</text></g>`;}).join('');
-  return head+`<div class="chartbox"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Dispersión de rentabilidad contra volatilidad">
-   ${g}<line class="ax" x1="${m.l}" x2="${m.l}" y1="${m.t}" y2="${H-m.b}"/><line class="ax" x1="${m.l}" x2="${W-m.r}" y1="${H-m.b}" y2="${H-m.b}"/>
-   ${pts}
-   <text class="axtitle" x="${(W+m.l)/2}" y="${H-12}" text-anchor="middle">Volatilidad — ${lab}</text>
-   <text class="axtitle" x="${-(H-m.b+m.t)/2}" y="16" transform="rotate(-90)" text-anchor="middle">Rentabilidad — ${lab}</text>
-  </svg></div>
-  <div class="legend"><span>Rentabilidad por unidad de riesgo (rent. ÷ vol., 12 meses): ${[...s].sort((a,b)=>b._ratio-a._ratio).slice(0,3).map(f=>`<b>${f.corto}</b> ${mil(f._ratio,1)}`).join(' · ')}</span></div>`;
-}
-
-/* ------- costos ------- */
-function viewCostos(){
-  const s=[...sel()].sort((a,b)=>b['Gastos totales']-a['Gastos totales']);
-  const head=pill('Costos','costos','green')+
-   '<p class="lead">Barra naranja: gastos totales del fondo. Barra verde: remuneración efectivamente cobrada por la administradora. Cuando la naranja es mucho menor que la verde, la ficha es inconsistente.</p>';
-  if(!s.length)return head+'<p class="lead">Seleccione al menos un fondo en el panel izquierdo.</p>';
-  const mx=Math.max(...s.map(f=>Math.max(f['Gastos totales'],f['Remuneración efectivamente cobrada'])));
-  const rows=s.map(f=>{
-    const g=f['Gastos totales']/mx*100, r=f['Remuneración efectivamente cobrada']/mx*100;
-    const alerta=f['Gastos totales']<f['Remuneración efectivamente cobrada']*0.5||f['Gastos totales']>0.025;
-    return `<div class="stack">
-      <div class="lbl"><b>${f.corto} ${alerta?'<span class="flag" data-tip="'+(FLAGS[f.Fondo]||'Revisar coherencia entre gasto y remuneración.')+'">!</span>':''}</b>
-        <span>gasto total ${pct(f['Gastos totales'])} · remuneración ${pct(f['Remuneración efectivamente cobrada'])}</span></div>
-      <div style="height:12px;background:var(--line-2);border-radius:3px;overflow:hidden;margin-bottom:3px"><div style="width:${g}%;height:100%;background:var(--amber)"></div></div>
-      <div style="height:12px;background:var(--line-2);border-radius:3px;overflow:hidden"><div style="width:${r}%;height:100%;background:var(--green)"></div></div>
-    </div>`;}).join('');
-  return head+rows+
-   `<div class="legend"><span><i style="background:var(--amber)"></i>Gastos totales</span><span><i style="background:var(--green)"></i>Remuneración cobrada</span></div>
-   <div class="callout" style="margin-top:18px">Un punto porcentual de gasto sobre $100 millones equivale a $1 millón al año. Entre el fondo más barato y el más caro de la selección hay ${pct(Math.max(...s.map(f=>f['Gastos totales']))-Math.min(...s.map(f=>f['Gastos totales'])))} de diferencia anual.</div>`;
-}
-
-/* ------- composición ------- */
-const BLOQUES=['Tipo de renta','Por país','Por sector económico','Por moneda','Por activo','Liquidez'];
-let bloque='Tipo de renta';
-function viewComposicion(){
-  const s=sel(); const cats=new Set();
-  s.forEach(f=>{const b=f.composicion[bloque]||{};Object.entries(b).forEach(([k,v])=>{if(v)cats.add(k);});});
-  const keys=[...cats];
-  const rows=s.map(f=>{
-    const b=f.composicion[bloque]||{}; const tot=keys.reduce((a,k)=>a+(b[k]||0),0);
-    if(!tot)return `<div class="stack"><div class="lbl"><b>${f.corto}</b><span>la ficha no reporta este bloque</span></div>
-      <div class="bars"><div style="width:100%;background:repeating-linear-gradient(45deg,#EEF2F6,#EEF2F6 6px,#E1E8EF 6px,#E1E8EF 12px)"></div></div></div>`;
-    return `<div class="stack"><div class="lbl"><b>${f.corto}</b><span>${f.composicion.fuente||''}</span></div>
-     <div class="bars">${keys.map(k=>{const v=b[k]||0;if(!v)return '';
-       return `<div style="width:${v/tot*100}%;background:${CAT[keys.indexOf(k)%CAT.length]}" data-tip="<b>${f.corto}</b><br>${k}: ${pct(v,2)}"></div>`;}).join('')}</div></div>`;
+/* ============ gráfico de barras ============ */
+function rank() {
+  const rows = filtered().slice().sort((a, b) => (b[rKey(per)] || 0) - (a[rKey(per)] || 0));
+  document.getElementById('rankTitle').textContent =
+    'Rentabilidad ' + perLabel[per] + ' — fondos comparados con ' + baseName();
+  const box = document.getElementById('rank');
+  if (!rows.length) { box.innerHTML = '<p class="muted">Ningún fondo cumple los filtros. Ajusta la búsqueda para ver resultados.</p>'; return; }
+  const h = 24, pad = 240, w = 900, max = Math.max(...rows.map(d => d[rKey(per)] || 0)) * 1.1;
+  const bt = base()[rKey(per)];
+  const bars = rows.map((d, i) => {
+    const v = d[rKey(per)] || 0, bw = Math.max(2, (v / max) * (w - pad - 64));
+    const nm = d.fondo.length > 36 ? d.fondo.slice(0, 35) + '…' : d.fondo;
+    return `<g><title>${d.fondo} — ${f.pct(v)}</title>
+      <text x="${pad - 8}" y="${i * h + 16}" text-anchor="end" font-size="11" fill="#44586B">${nm}</text>
+      <rect x="${pad}" y="${i * h + 5}" width="${bw}" height="15" rx="2" fill="${colorOf(d)}"></rect>
+      <text x="${pad + bw + 7}" y="${i * h + 16}" font-size="11" fill="#122334" font-weight="600">${f.pct(v)}</text></g>`;
   }).join('');
-  const exp=s.filter(f=>f.composicion['Exposición neta']&&f.composicion['Exposición neta'].neta!=null);
-  return pill('Composición del portafolio','composicion','green')+
-   `<p class="lead">Cada barra suma 100% de lo que reporta la ficha del fondo. Pase el cursor sobre un segmento para ver el porcentaje exacto.</p>
-   <div class="controls"><span class="seg">${BLOQUES.map(b=>`<button data-bloque="${b}" aria-pressed="${bloque===b}">${b}</button>`).join('')}</span></div>
-   ${rows||'<p class="lead">Seleccione al menos un fondo en el panel izquierdo.</p>'}
-   <div class="legend">${keys.map((k,i)=>`<span><i style="background:${CAT[i%CAT.length]}"></i>${k}</span>`).join('')}</div>
-   ${bloque==='Por moneda'&&exp.length?`<div class="callout" style="margin-top:18px"><b>Cobertura cambiaria.</b> ${exp.map(f=>`${f.corto}: exposición bruta ${pct(f.composicion['Exposición neta'].posicion||0,2)}, derivado ${pct(f.composicion['Exposición neta'].derivado||0,2)}, <b>neta ${pct(f.composicion['Exposición neta'].neta||0,2)}</b>`).join('. ')}.</div>`:''}
-   ${bloque==='Liquidez'?`<div class="callout" style="margin-top:18px">Solo seis fondos permiten llenar este bloque y el denominador no es idéntico entre ellos: unos separan ahorros y corriente dentro del tipo de renta, otros separan disponible y simultáneas dentro de la composición del activo.</div>`:''}`;
+  const bx = pad + (bt / max) * (w - pad - 64);
+  box.innerHTML = `<svg viewBox="0 0 ${w} ${rows.length * h + 10}" width="100%" role="img" aria-label="Rentabilidad por fondo">
+      <line x1="${bx}" y1="0" x2="${bx}" y2="${rows.length * h}" stroke="#00A34A" stroke-width="1" stroke-dasharray="3 3" opacity=".6"></line>
+      ${bars}</svg>`;
 }
 
-/* ------- ficha ------- */
-let fichaI=0;
-function viewFicha(){
-  const s=sel();
-  const head=pill('Ficha del fondo','ficha','navy');
-  if(!s.length)return head+'<p class="lead">Seleccione al menos un fondo en el panel izquierdo.</p>';
-  const f=s.find(x=>x._i===fichaI)||s[0]; fichaI=f._i;
-  const dl=(t,pairs)=>`<div class="dl"><h4>${t}</h4>${pairs.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('')}</div>`;
-  const c=f.composicion;
-  const comps=BLOQUES.filter(b=>c[b]&&Object.values(c[b]).some(v=>v)).map(b=>
-    dl(b,Object.entries(c[b]).filter(([k,v])=>v).map(([k,v])=>[k,pct(v,2)])));
-  return head+`<p class="lead">Todo lo consolidado para un fondo, en una sola vista.</p>
-  <div class="controls"><label for="fichasel">Fondo</label><select id="fichasel">${s.map(x=>`<option value="${x._i}" ${x._i===f._i?'selected':''}>${x.Fondo}</option>`).join('')}</select></div>
-  ${FLAGS[f.Fondo]?`<div class="callout">${FLAGS[f.Fondo]}</div>`:''}
-  <div class="grid2">
-   ${dl('Identificación',[['Administradora',f['Administrador/Gestor']],['Participación',txt(f['Participación'])],['Tipo de fondo',txt(f['Tipo de fondo'])],['Código SFC',txt(f['Código SFC'])],['Fecha de corte',txt(f['Fecha de corte'])],['Calificación',txt(f['Calificación'])],['Calificadora',txt(f['Calificadora'])]])}
-   ${dl('Tamaño',[['Activos (Mill COP)',mil(f['Valor fondo (Mill COP)'])],['Valor de la unidad',mil(f['Valor unidad'],2)]])}
-   ${dl('Rentabilidad',[['Último mes',pct(f['Rentabilidad último mes'])],['Últimos 6 meses',pct(f['Rentabilidad últimos 6 meses'])],['Año corrido',pct(f['Rentabilidad año corrido'])],['Últimos 12 meses',pct(f['Rentabilidad último año'])]])}
-   ${dl('Volatilidad',[['Último mes',pct(f['Volatilidad último mes'],3)],['Últimos 6 meses',pct(f['Volatilidad últimos 6 meses'],3)],['Año corrido',pct(f['Volatilidad año corrido'],3)],['Últimos 12 meses',pct(f['Volatilidad último año'],3)],['Rent. ÷ vol. (12 m)',mil(f._ratio,1)]])}
-   ${dl('Costos',[['Gastos totales',pct(f['Gastos totales'])],['Remuneración cobrada',pct(f['Remuneración efectivamente cobrada'])],['Administración',pct(f['Administración'])]])}
-   ${dl('Acceso y permanencia',[['Inversión inicial mínima',cop(f['Inversión inicial mínima (COP)'])],['Saldo mínimo',cop(f['Saldo mínimo (COP)'])],['Preaviso de retiro',txt(f['Preaviso retiro (días)'])],['Días de pacto',txt(f['Días pacto permanencia'])],['Sanción por retiro',txt(f['Sanción retiro anticipado'])]])}
-   ${dl('Plazos',[['Duración (años)',mil(f['Duración (años)'],3)],['Plazo prom. incl. disponible',mil(f['Plazo promedio incl. disponible (dias)'],1)+' días'],['Plazo prom. excl. disponible',mil(f['Plazo promedio excl. disponible (dias)'],1)+' días']])}
-   ${comps.join('')}
-  </div>`;
+/* ============ tabla ============ */
+function table() {
+  const rows = filtered().slice().sort((a, b) => {
+    const x = a[sortK], y = b[sortK];
+    if (typeof x === 'number' && typeof y === 'number') return (x - y) * sortDir;
+    return String(x).localeCompare(String(y), 'es') * sortDir;
+  });
+  document.getElementById('thComp').textContent = 'Comparable con ' + baseName();
+  document.getElementById('count').textContent = '· ' + rows.length + ' de ' + groupOf(grupo).length;
+  document.getElementById('tb').innerHTML = rows.map(d => {
+    const isB = d.fondo === baseName();
+    const st = isB ? 'si' : d.comparable === 'SI' ? 'si' : d.comparable === 'NO' ? 'no' : 'td';
+    const lb = isB ? 'Referencia' : d.comparable === 'SI' ? 'Sí' : d.comparable === 'NO' ? 'No' : 'Por definir';
+    const why = isB ? 'Fondo de referencia de este grupo'
+      : d.argumento ? d.argumento
+        : d.comparable === 'SI' ? 'Cumple los criterios de comparación'
+          : 'Sin argumento registrado en la lista de comparables.';
+    return `<tr data-f="${encodeURIComponent(d.fondo)}" ${isB ? 'class="base"' : ''}>
+      <td><span class="fname">${d.fondo}</span></td>
+      <td class="muted">${d.admin}</td>
+      <td class="num">${f.mill(d.valor)}</td>
+      <td class="num">${f.pct(d.r1m)}</td><td class="num">${f.pct(d.r6m)}</td>
+      <td class="num">${f.pct(d.rytd)}</td><td class="num">${f.pct(d.r1a)}</td>
+      <td class="num muted">${f.pct(d.v1m)}</td><td class="num muted">${f.pct(d.v6m)}</td>
+      <td class="num muted">${f.pct(d.vytd)}</td><td class="num muted">${f.pct(d.v1a)}</td>
+      <td style="text-align:left"><span class="pill ${st}"><i class="dot"></i>${lb}</span>
+        <span class="why">${why.length > 130 ? why.slice(0, 129) + '…' : why}</span></td>
+    </tr>`;
+  }).join('');
 }
 
-/* ------- notas ------- */
-function viewNotas(){
-  return pill('Notas y supuestos','notas','navy')+
-  `<p class="lead">Lo que hay que tener presente antes de comparar estas cifras. Vienen de la hoja «Notas y supuestos» del archivo original.</p>
-  ${NOTAS.map(n=>`<div class="note"><b>${n.tema}</b><span>${n.detalle}</span></div>`).join('')}`;
+/* ============ panel de detalle ============ */
+function openFund(name) {
+  const d = all().find(x => x.fondo === name), b = base();
+  const isB = d.fondo === baseName();
+  const st = isB ? 'si' : d.comparable === 'SI' ? 'si' : d.comparable === 'NO' ? 'no' : 'td';
+  document.getElementById('dName').textContent = d.fondo;
+  document.getElementById('dMeta').textContent = `${d.admin} · Grupo ${d.ref}`;
+
+  const row = (lb, v, bv, fmt, inv) => {
+    const dd = (v == null || bv == null || isB) ? null : v - bv;
+    const cls = dd == null ? '' : (inv ? (dd <= 0 ? 'up' : 'dn') : (dd >= 0 ? 'up' : 'dn'));
+    const txt = dd == null ? '—' : (fmt === 'pct' ? f.bps(dd) : (dd >= 0 ? '+' : '−') + f.mill(Math.abs(dd)));
+    return `<tr><td>${lb}</td><td class="num">${fmt === 'pct' ? f.pct(v) : f.mill(v)}</td>
+      <td class="num muted">${fmt === 'pct' ? f.pct(bv) : f.mill(bv)}</td><td class="num ${cls}">${txt}</td></tr>`;
+  };
+
+  const head = isB ? 'Fondo de referencia de este grupo'
+    : d.comparable === 'SI' ? `Comparable con ${baseName()}`
+      : d.comparable === 'NO' ? `No comparable con ${baseName()}`
+        : `Comparabilidad por definir frente a ${baseName()}`;
+  const txt = isB ? 'Los demás fondos de este grupo se evalúan frente a él.'
+    : d.argumento || (d.comparable === 'SI'
+      ? 'Perfil de plazo, liquidez y riesgo alineados con el fondo de referencia, por lo que comparar rentabilidades es válido.'
+      : 'Sin argumento registrado en la lista de comparables.');
+
+  document.getElementById('dBody').innerHTML = `
+    <div class="verdict ${st}"><h4>${head}</h4>${vinetas(txt)}</div>
+
+    <div class="sec">Participación y comisión</div>
+    <table class="cmp"><thead><tr><th>Concepto</th><th>${isB ? 'Valor' : 'Este fondo'}</th><th>${baseName()}</th></tr></thead><tbody>
+      <tr><td>Participación</td><td class="num" style="font-weight:600">${d.participacion || 'Única'}</td>
+        <td class="num muted">${isB ? '—' : (b.participacion || 'Única')}</td></tr>
+      <tr><td>Comisión de administración</td><td class="num" style="font-weight:600">${f.pct(d.administracion)}</td>
+        <td class="num muted">${isB ? '—' : f.pct(b.administracion)}</td></tr>
+    </tbody></table>
+
+    <div class="sec">Rentabilidad y volatilidad frente a ${baseName()}</div>
+    <table class="cmp"><thead><tr><th>Indicador</th><th>${isB ? 'Valor' : 'Este fondo'}</th><th>${baseName()}</th><th>Diferencia</th></tr></thead><tbody>
+      ${row('Rentabilidad último mes', d.r1m, b.r1m, 'pct')}
+      ${row('Rentabilidad últimos 6 meses', d.r6m, b.r6m, 'pct')}
+      ${row('Rentabilidad año corrido', d.rytd, b.rytd, 'pct')}
+      ${row('Rentabilidad último año', d.r1a, b.r1a, 'pct')}
+      ${row('Volatilidad último mes', d.v1m, b.v1m, 'pct', 1)}
+      ${row('Volatilidad último año', d.v1a, b.v1a, 'pct', 1)}
+      ${row('Valor del fondo (Mill COP)', d.valor, b.valor, 'mill')}
+    </tbody></table>
+
+  `;
+
+  document.getElementById('drawer').classList.add('on');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'false');
+  document.getElementById('scrim').classList.add('on');
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('on');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'true');
+  document.getElementById('scrim').classList.remove('on');
 }
 
-/* ------- router ------- */
-let view='tabla';
-const VIEWS={tabla:viewTabla,riesgo:viewRiesgo,costos:viewCostos,composicion:viewComposicion,ficha:viewFicha,notas:viewNotas};
-const panel=document.getElementById('panel');
-function render(){drawKpis();panel.innerHTML=VIEWS[view]();}
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
-  view=t.dataset.view;
-  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
-  render();});
-panel.addEventListener('click',e=>{
-  const g=e.target.closest('[data-group]'); if(g){group=g.dataset.group;
-    sortKey=COLS[group][0][0]; sortDir=COLS[group][0][3]===-1?1:-1; render(); return;}
-  const b=e.target.closest('[data-bloque]'); if(b){bloque=b.dataset.bloque;render();return;}
-  const th=e.target.closest('th'); if(th&&th.dataset.k){
-    if(sortKey===th.dataset.k)sortDir*=-1; else {sortKey=th.dataset.k;sortDir=-1;}
-    render();}});
-panel.addEventListener('change',e=>{
-  if(e.target.id==='winsel'){win=e.target.value;render();}
-  if(e.target.id==='fichasel'){fichaI=+e.target.value;render();}});
-drawList();render();
+/* ============ csv ============ */
+function csv() {
+  const h = ['Fondo', 'Administrador/Gestor', 'Grupo de referencia', 'Valor fondo (Mill COP)', 'Rent 1 mes',
+    'Rent 6 meses', 'Rent año corrido', 'Rent 1 año', 'Vol 1 mes', 'Vol 6 meses', 'Vol año corrido', 'Vol 1 año',
+    'Comparable con ' + baseName(), 'Argumento'];
+  const q = s => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
+  const body = filtered().map(d => [d.fondo, d.admin, d.ref, d.valor, d.r1m, d.r6m, d.rytd, d.r1a,
+  d.v1m, d.v6m, d.vytd, d.v1a, d.comparable || 'POR DEFINIR', d.argumento].map(q).join(';'));
+  const blob = new Blob(['\ufeff' + [h.map(q).join(';'), ...body].join('\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'comparacion_' + baseName().toLowerCase().replace(/[^a-z0-9]+/g, '_') + '.csv';
+  a.click();
+}
+
+/* ============ init ============ */
+function refButtons() {
+  document.getElementById('refs').innerHTML = REFS.map(r =>
+    `<button class="ref" data-g="${r}" aria-pressed="${r === grupo}">
+       <b>${r}</b><small>${groupOf(r).length} fondos en el grupo</small></button>`).join('');
+  document.querySelectorAll('#refs button').forEach(b => b.onclick = () => {
+    grupo = b.dataset.g;
+    document.querySelectorAll('#refs button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.getElementById('fAdmin').value = '';
+    render();
+  });
+}
+function render() {
+  const admins = [...new Set(groupOf(grupo).map(d => d.admin))].sort((a, b) => a.localeCompare(b, 'es'));
+  const sel = document.getElementById('fAdmin'), keep = sel.value;
+  sel.innerHTML = '<option value="">Todos los administradores</option>' + admins.map(v => `<option>${v}</option>`).join('');
+  if (admins.includes(keep)) sel.value = keep;
+  rank(); table();
+}
+
+(async function init() {
+  document.getElementById('corte').textContent = 'Corte ' + FONDOS[0].corte;
+  document.getElementById('q').oninput = render;
+  document.getElementById('fAdmin').onchange = () => { rank(); table(); };
+  document.getElementById('onlyComp').onchange = render;
+  document.getElementById('csv').onclick = csv;
+  refButtons();
+  document.querySelectorAll('#segPer button').forEach(b => b.onclick = () => {
+    per = b.dataset.p; sortK = rKey(per); sortDir = -1;
+    document.querySelectorAll('#segPer button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    render();
+  });
+  document.querySelectorAll('#tbl thead th').forEach(th => th.onclick = () => {
+    const k = th.dataset.k;
+    sortDir = (sortK === k) ? -sortDir : (typeof FONDOS[0][k] === 'number' ? -1 : 1);
+    sortK = k; table();
+  });
+  document.getElementById('tb').onclick = e => {
+    const tr = e.target.closest('tr'); if (tr) openFund(decodeURIComponent(tr.dataset.f));
+  };
+  document.getElementById('close').onclick = closeDrawer;
+  document.getElementById('scrim').onclick = closeDrawer;
+  document.onkeydown = e => { if (e.key === 'Escape') closeDrawer(); };
+  render();
+})();
 
 </script>
-</body>
-</html>
