@@ -256,7 +256,7 @@ body.bloqueado .wrap{display:none}
 <script>
 /* Correos autorizados. No se guarda el correo, solo su huella digital (SHA-256
    con sal y repeticiones), así que la lista no se puede leer desde este archivo. */
-const ACCESO = {"sal":"76a4f63389c03dd2","vueltas":6000,"huellas":["de04639cda77a9e6e721569a3f866b6184f81d6606b7cc35c40832dabc2928a9","59d62c74986f8cf1877596dbcb844bff225b1ac470b64bc0c0b752d761fe7a3c"]};
+const ACCESO = {"sal":"8a6b758620878ad9","vueltas":6000,"huellas":["53a3c7d4ff51510a142aedb0a8647a8a873a6907baf4c3fbde7baed51b3b38e7","63a7230b39f2e0702cd04a9bac8b05250a31bf8a03ae1f7a13a59e96d5acd872","638f300734d3f351ac61ae094c41af160f00b66255e26a98e0400d2eb342d91a","7c2fdb345838db333bae98aae56c140b2d2dabe464d72956ace14addc190b60c","30d07cfaadb9d902403c27a090d3c3f9f672157235327387758ed217ba7cb5a2","a36ccf6b0afe9bacebfa4c8a5779822981f42ae30ef09a707de5c7393fe7aabd","359ac5511e9aaec93071c579e2d6a89d6733df1797a2c7e5ad458b4c632cc7a7","b96f08710b7e8a82fe43164d078bd9f215a44834484548978cc03798fa188c5c","3c2c70dfb06aa4c7ac350dafe3d734927af4077af7c23306317e4cb75ac629b8","1a30f80cbeb544bacbb98cdf87731643f784407f72269b34c07a2d6206eef911","d6b13398f7e1ba5d263cd738322d92d34070a5bbaedf21430dfd93581707bb4a"]};
 
 /* SHA-256 en JavaScript puro (no depende de crypto.subtle, funciona abriendo el
    archivo desde una carpeta de red). Devuelve el resultado en hexadecimal. */
