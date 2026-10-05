@@ -37,6 +37,9 @@ body{margin:0;background:var(--bg);color:var(--ink);
   background:var(--green-2);margin-right:7px;transform:translateY(-2px)}
 .cut{background:#fff;color:var(--navy);border-radius:6px;padding:7px 12px;
   font-size:12px;font-weight:600;display:inline-block}
+.conf{margin-top:11px;display:inline-block;font-size:14px;font-weight:700;letter-spacing:.02em;
+  color:#FFC24D;background:rgba(255,178,44,.14);border:1px solid rgba(255,194,77,.55);
+  border-radius:6px;padding:7px 13px}
 
 /* selector de fondo de referencia */
 .refs{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
@@ -137,9 +140,46 @@ textarea{width:100%;min-height:120px;font:inherit;font-size:12.5px;line-height:1
   width:28px;height:28px;border-radius:6px;font-size:16px;cursor:pointer;line-height:1}
 .foot{color:var(--ink-3);font-size:11px;text-align:center;padding:16px 8px 6px}
 svg text{font-family:'Inter',sans-serif}
+
+/* ---------- pantalla de ingreso ---------- */
+body.bloqueado .wrap{display:none}
+#acceso{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;
+  background:linear-gradient(103deg,#0B2440 0%,#0E2C4B 38%,#1B4B79 72%,#24618F 100%)}
+#acceso:after{content:"";position:absolute;inset:0;opacity:.20;pointer-events:none;
+  background:radial-gradient(circle at 78% 18%, rgba(65,183,91,.55), transparent 42%),
+   repeating-linear-gradient(112deg, rgba(255,255,255,.06) 0 2px, transparent 2px 26px)}
+.caja{position:relative;z-index:1;background:#fff;border-radius:12px;padding:28px 30px;
+  width:min(420px,100%);box-shadow:0 18px 50px rgba(5,20,38,.45)}
+.caja .brand{color:var(--navy);font-size:19px;margin-bottom:18px}
+.caja h2{margin:0;font-size:20px;font-weight:600;color:var(--navy)}
+.caja .sub{margin:2px 0 18px;font-size:12.5px;color:var(--ink-2)}
+.caja label{display:block;font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:5px}
+.caja input{width:100%;font:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);
+  border-radius:6px;background:#FAFCFD;color:var(--ink)}
+.caja button{width:100%;margin-top:12px;font:inherit;font-size:14px;font-weight:600;color:#fff;
+  background:var(--green);border:0;border-radius:6px;padding:11px;cursor:pointer}
+.caja button:hover{background:#00913F}
+.caja button[disabled]{background:#9BC7AC;cursor:default}
+#accesoError{margin:11px 0 0;font-size:12.5px;color:#B4471F;min-height:17px}
+.aviso{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);
+  font-size:12px;font-weight:600;color:#9A6210;background:#FBEEDC;border-radius:6px;
+  padding:9px 11px;border-top:0}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink-2);margin-top:8px}
 .legend i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:5px}
 </style>
+
+<div id="acceso">
+  <div class="caja">
+    <div class="brand">skandia</div>
+    <h2>Competencia FICs</h2>
+    <p class="sub">Acceso restringido. Ingresa tu correo corporativo para continuar.</p>
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" autocomplete="off" spellcheck="false" placeholder="nombre@empresa.com">
+    <button id="entrar">Ingresar</button>
+    <p id="accesoError" role="alert"></p>
+    <p class="aviso">Información confidencial para uso interno</p>
+  </div>
+</div>
 
 <div class="wrap">
   <header class="hero">
@@ -150,6 +190,7 @@ svg text{font-family:'Inter',sans-serif}
       <div style="text-align:right">
         <div class="brand">skandia</div>
         <div style="margin-top:10px"><span class="cut" id="corte">Corte 31/08/2026</span></div>
+        <div class="conf">Información confidencial para uso interno</div>
       </div>
     </div>
     <div class="refs" id="refs" role="group" aria-label="Fondo de referencia"></div>
@@ -213,6 +254,106 @@ svg text{font-family:'Inter',sans-serif}
 </aside>
 
 <script>
+/* Correos autorizados. No se guarda el correo, solo su huella digital (SHA-256
+   con sal y repeticiones), así que la lista no se puede leer desde este archivo. */
+const ACCESO = {"sal":"76a4f63389c03dd2","vueltas":6000,"huellas":["de04639cda77a9e6e721569a3f866b6184f81d6606b7cc35c40832dabc2928a9","59d62c74986f8cf1877596dbcb844bff225b1ac470b64bc0c0b752d761fe7a3c"]};
+
+/* SHA-256 en JavaScript puro (no depende de crypto.subtle, funciona abriendo el
+   archivo desde una carpeta de red). Devuelve el resultado en hexadecimal. */
+function sha256hex(msg) {
+  const K = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+  let H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+
+  // texto -> bytes UTF-8
+  const bytes = [];
+  for (const ch of String(msg)) {
+    let c = ch.codePointAt(0);
+    if (c < 0x80) bytes.push(c);
+    else if (c < 0x800) bytes.push(0xc0 | c >> 6, 0x80 | c & 63);
+    else if (c < 0x10000) bytes.push(0xe0 | c >> 12, 0x80 | (c >> 6) & 63, 0x80 | c & 63);
+    else bytes.push(0xf0 | c >> 18, 0x80 | (c >> 12) & 63, 0x80 | (c >> 6) & 63, 0x80 | c & 63);
+  }
+  const bits = bytes.length * 8;
+  bytes.push(0x80);
+  while (bytes.length % 64 !== 56) bytes.push(0);
+  for (let i = 7; i >= 0; i--) bytes.push(Math.floor(bits / Math.pow(2, i * 8)) & 0xff);
+
+  const w = new Uint32Array(64);
+  const rotr = (x, n) => (x >>> n) | (x << (32 - n));
+  for (let p = 0; p < bytes.length; p += 64) {
+    for (let i = 0; i < 16; i++)
+      w[i] = (bytes[p + i * 4] << 24) | (bytes[p + i * 4 + 1] << 16) | (bytes[p + i * 4 + 2] << 8) | bytes[p + i * 4 + 3];
+    for (let i = 16; i < 64; i++) {
+      const s0 = rotr(w[i - 15], 7) ^ rotr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
+      const s1 = rotr(w[i - 2], 17) ^ rotr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
+      w[i] = (w[i - 16] + s0 + w[i - 7] + s1) >>> 0;
+    }
+    let [a, b, c, d, e, f, g, h] = H;
+    for (let i = 0; i < 64; i++) {
+      const S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+      const t1 = (h + S1 + ((e & f) ^ (~e & g)) + K[i] + w[i]) >>> 0;
+      const S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+      const t2 = (S0 + ((a & b) ^ (a & c) ^ (b & c))) >>> 0;
+      h = g; g = f; f = e; e = (d + t1) >>> 0;
+      d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+    }
+    H = [H[0] + a, H[1] + b, H[2] + c, H[3] + d, H[4] + e, H[5] + f, H[6] + g, H[7] + h].map(x => x >>> 0);
+  }
+  return H.map(x => x.toString(16).padStart(8, '0')).join('');
+}
+
+
+function huella(texto) {
+  let h = sha256hex(ACCESO.sal + '|' + texto);
+  for (let i = 0; i < ACCESO.vueltas; i++) h = sha256hex(ACCESO.sal + '|' + h);
+  return h;
+}
+
+function validarCorreo() {
+  const campo = document.getElementById('correo');
+  const boton = document.getElementById('entrar');
+  const error = document.getElementById('accesoError');
+  const correo = campo.value.trim().toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) {
+    error.textContent = 'Escribe un correo electrónico válido.';
+    return;
+  }
+  error.textContent = '';
+  boton.disabled = true;
+  boton.textContent = 'Validando…';
+  // el tiempo de espera deja que el botón se pinte antes del cálculo
+  setTimeout(() => {
+    const dominio = correo.slice(correo.indexOf('@'));
+    const ok = ACCESO.huellas.includes(huella(correo)) || ACCESO.huellas.includes(huella(dominio));
+    if (!ok) {
+      boton.disabled = false;
+      boton.textContent = 'Ingresar';
+      error.textContent = 'Este correo no está autorizado para consultar la herramienta.';
+      campo.select();
+      return;
+    }
+    document.getElementById('acceso').remove();
+    document.body.classList.remove('bloqueado');
+    iniciarApp();
+  }, 30);
+}
+
+document.body.classList.add('bloqueado');
+document.getElementById('entrar').onclick = validarCorreo;
+document.getElementById('correo').onkeydown = e => {
+  if (e.key === 'Enter') validarCorreo();
+  else document.getElementById('accesoError').textContent = '';
+};
+document.getElementById('correo').focus();
+
 const FONDOS = [{"fondo":"FIC Skandia Efectivo","participacion":"Tipo D - 503","admin":"Skandia Fiduciaria S.A.","corte":"31/08/2026","valor":1551740.73,"administracion":0.015,"r1m":0.11428,"r6m":0.11334,"rytd":0.10187,"r1a":0.08772,"v1m":0.00159,"v6m":0.00307,"vytd":0.00364,"v1a":0.00384,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"BBVA Efectivo","participacion":"Clase A - 501","admin":"BBVA Asset Management S.A. Sociedad Fiduciaria","corte":"31/08/2026","valor":5891077.57,"administracion":0.0165,"r1m":0.10502,"r6m":0.09856,"rytd":0.09126,"r1a":0.08217,"v1m":0.00075,"v6m":0.00105,"vytd":0.00128,"v1a":0.00137,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Credicorp Capital Alta Liquidez","participacion":"A","admin":"Credicorp Capital Colombia S.A.","corte":"31/08/2026","valor":6946819.55,"administracion":0.015,"r1m":0.10694,"r6m":0.10257,"rytd":0.09488,"r1a":0.08563,"v1m":0.00102,"v6m":0.00153,"vytd":0.0017,"v1a":0.00166,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Credicorp Capital Vista","participacion":"A","admin":"Credicorp Capital Colombia S.A.","corte":"31/08/2026","valor":1180298.87,"administracion":0.019,"r1m":0.11406,"r6m":0.10747,"rytd":0.09441,"r1a":0.08248,"v1m":0.00175,"v6m":0.00267,"vytd":0.00304,"v1a":0.003,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Avanzar Vista","participacion":"T.P. 3 No asociado a Coomeva 1","admin":"Fiduciaria Coomeva S.A.","corte":"31/08/2026","valor":260472.69,"administracion":0.015,"r1m":0.11717,"r6m":0.10563,"rytd":0.09018,"r1a":0.07937,"v1m":0.0027,"v6m":0.0027,"vytd":0.0035,"v1a":0.0034,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto BTG Pactual Liquidez","participacion":"Clase A","admin":"BTG Pactual S.A. Comisionista de Bolsa","corte":"31/08/2026","valor":4780528.93,"administracion":0.015,"r1m":0.12175,"r6m":0.11618,"rytd":0.10356,"r1a":0.08961,"v1m":0.00207,"v6m":0.00257,"vytd":0.00277,"v1a":0.00291,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Efectivo a la Vista","participacion":"Part. 6 - Tradicional","admin":"Fiduciaria La Previsora S.A.","corte":"31/08/2026","valor":1322068.14,"administracion":0.016,"r1m":0.11019,"r6m":0.10644,"rytd":0.09222,"r1a":0.08218,"v1m":0.0013,"v6m":0.0016,"vytd":0.0021,"v1a":0.0023,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Fidugob","participacion":"TP 1 - Inversionista I","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":5810236.55,"administracion":0.014,"r1m":0.11878,"r6m":0.11371,"rytd":0.09544,"r1a":0.08442,"v1m":0.00199,"v6m":0.00236,"vytd":0.0032,"v1a":0.00344,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Fidugob permite inversiones con vencimientos de hasta 15 años, frente a un máximo de 2 años en FIC Efectivo. Fidugob puede invertir hasta un 20% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Occirenta","participacion":"Tipo 8. NEG FID II - 508","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":3665194.2,"administracion":0.015,"r1m":0.11948,"r6m":0.11447,"rytd":0.09453,"r1a":0.08266,"v1m":0.00186,"v6m":0.00239,"vytd":0.00352,"v1a":0.00387,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Occirenta permite invertir en instrumentos con vencimientos de hasta 30 años, frente al máximo de 2 años establecido para FIC Efectivo. FIC Occirenta contempla una duración promedio de hasta 5 años, significativamente superior al 1 año de FIC Efectivo. FIC Occirenta puede invertir hasta un 10% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Rendir","participacion":"Único","admin":"DAVIbank Fiduciaria S.A.","corte":"31/07/2026","valor":436977.8,"administracion":0.017,"r1m":0.10649,"r6m":0.10081,"rytd":0.09012,"r1a":0.07818,"v1m":0.00229,"v6m":0.00388,"vytd":0.00389,"v1a":0.00383,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Sumar","participacion":"TP 9 - Admon III","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":6371449.81,"administracion":0.014,"r1m":0.11713,"r6m":0.11511,"rytd":0.09786,"r1a":0.08635,"v1m":0.002,"v6m":0.00227,"vytd":0.00305,"v1a":0.00326,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Sumar permite invertir en instrumentos con vencimientos de hasta 15 años, frente al máximo de 2 años establecido para FIC Efectivo. FIC Sumar puede mantener hasta un 20% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Superior","participacion":"Tipo de participación S2","admin":"Fiduciaria Davivienda S.A.","corte":"31/08/2026","valor":8841193.4,"administracion":0.015,"r1m":0.1118,"r6m":0.11016,"rytd":0.10053,"r1a":0.08494,"v1m":0.00144,"v6m":0.00235,"vytd":0.00331,"v1a":0.00378,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Superior puede invertir hasta un 30% en renta variable, mientras que FIC Efectivo concentra sus inversiones exclusivamente en renta fija. FIC Superior permite hasta un 40% de las inversiones en moneda extranjera y hasta un 20% en participaciones de FIC extranjeros; en FIC Efectivo, la exposición en moneda extranjera está limitada al 20% y no se permiten inversiones en otros FIC. FIC Superior establece un plazo promedio ponderado máximo 1.5 años, en FIC Efectivo es máximo 1 año."},{"fondo":"FIC Interés","participacion":"Participación A (501)","admin":"Davivienda Corredores S.A.","corte":"31/08/2026","valor":4004689.85,"administracion":0.018,"r1m":0.10856,"r6m":0.10019,"rytd":0.09054,"r1a":0.08031,"v1m":0.00153,"v6m":0.00225,"vytd":0.00249,"v1a":0.00241,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Valor Plus","participacion":"TP2 - 506","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":1952667.79,"administracion":0.015,"r1m":0.11997,"r6m":0.11439,"rytd":0.09746,"r1a":0.08464,"v1m":0.00205,"v6m":0.00224,"vytd":0.00296,"v1a":0.00324,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Fiducuenta","participacion":"Tipo C","admin":"Fiduciaria Bancolombia S.A.","corte":"31/08/2026","valor":25357358.57,"administracion":0.0151,"r1m":0.12493,"r6m":0.11602,"rytd":0.10412,"r1a":0.08759,"v1m":0.00244,"v6m":0.00271,"vytd":0.00354,"v1a":0.00401,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"Fiducuenta puede invertir hasta un 30% en ETF y otros FIC, mientras que FIC Efectivo no contempla este tipo de activos. Fiducuenta puede utilizar instrumentos derivados con fines de inversión hasta por el 40% del portafolio, FIC Efectivo solo puede hacer derivados con fines de cobertura. Fiducuenta permite inversiones de hasta 7 años, con un plazo promedio ponderado de hasta 2 años, frente a los 2 años y 1 año, respectivamente, de FIC Efectivo"},{"fondo":"Fondo Abierto Alianza","participacion":"Corporativos B","admin":"Alianza Fiduciaria S.A.","corte":"31/08/2026","valor":9311842.01,"administracion":0.0127,"r1m":0.12381,"r6m":0.11603,"rytd":0.10281,"r1a":0.08958,"v1m":0.00161,"v6m":0.00247,"vytd":0.00294,"v1a":0.00292,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"Fondo Abierto Alianza puede invertir hasta un 5% en ETF de largo plazo y hasta un 20% en FIC de renta fija local; FIC Efectivo no contempla estas alternativas de inversión. FIC Abierto permite inversiones con vencimientos de hasta 30 años, en FIC Efectivo, el plazo máximo de inversión es de 2 años. FIC Abierto Alianza establece un plazo promedio ponderado máximo de 3 años, frente a 1 año en FIC Efectivo."},{"fondo":"FIC Skandia Multiplazo","participacion":"Tipo D3 - 533","admin":"Skandia Fiduciaria S.A.","corte":"31/08/2026","valor":82893.08,"administracion":0.014,"r1m":0.12882,"r6m":0.13843,"rytd":0.10463,"r1a":0.08286,"v1m":0.00685,"v6m":0.00936,"vytd":0.00995,"v1a":0.01051,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"BBVA Plazo 30","participacion":"Clase A - 801","admin":"BBVA Asset Management S.A. Sociedad Fiduciaria","corte":"31/08/2026","valor":48074.41,"administracion":0.015,"r1m":0.13231,"r6m":0.12575,"rytd":0.10048,"r1a":0.07776,"v1m":0.00685,"v6m":0.00696,"vytd":0.00757,"v1a":0.00875,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Altarenta","participacion":"TP 1 - Inversionista I","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":91206.63,"administracion":0.015,"r1m":0.13435,"r6m":0.13926,"rytd":0.09329,"r1a":0.08053,"v1m":0.00395,"v6m":0.006,"vytd":0.01057,"v1a":0.01067,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Rentar","participacion":"TP Otros Inversionistas - 535","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":407319.82,"administracion":0.015,"r1m":0.11459,"r6m":0.10951,"rytd":0.09326,"r1a":0.08263,"v1m":0.00188,"v6m":0.00207,"vytd":0.00272,"v1a":0.00285,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Renta Fija Mediano Plazo - Multiescala","participacion":"Participación A (501)","admin":"Davivienda Corredores S.A.","corte":"31/08/2026","valor":258540.38,"administracion":0.015,"r1m":0.12872,"r6m":0.16735,"rytd":0.11942,"r1a":0.08594,"v1m":0.00921,"v6m":0.02124,"vytd":0.02036,"v1a":0.01905,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""}];
 /* ============ estado ============ */
 const REFS = [...new Set(FONDOS.map(d => d.ref))];   // fondos de referencia, salen del archivo
@@ -401,7 +542,7 @@ function render() {
   rank(); table();
 }
 
-(async function init() {
+function iniciarApp() {
   document.getElementById('corte').textContent = 'Corte ' + FONDOS[0].corte;
   document.getElementById('q').oninput = render;
   document.getElementById('fAdmin').onchange = () => { rank(); table(); };
@@ -425,6 +566,6 @@ function render() {
   document.getElementById('scrim').onclick = closeDrawer;
   document.onkeydown = e => { if (e.key === 'Escape') closeDrawer(); };
   render();
-})();
+}
 
 </script>
